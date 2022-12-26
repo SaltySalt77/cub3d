@@ -6,7 +6,7 @@
 /*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:18:01 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/26 16:40:55 by hyna             ###   ########.fr       */
+/*   Updated: 2022/12/26 17:03:19 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,7 @@ void	save_textures(char	**file, t_textures	*textures)
 		line = ft_split(file[i], ' ');
 		if (!line || line[2])
 		{
-			// printf("%s\n",line[2]);
-			printf("%d %d %d\n",i,j,cnt);
-
 			ft_free_split(file);
-			printf("t1\n");//
 			perror_exit();
 		}
 		j = 0;
@@ -100,10 +96,8 @@ void	save_textures(char	**file, t_textures	*textures)
 				{
 					ft_free_split(file);
 					ft_free_split(line);
-					printf("t2\n");//
 					perror_exit();
 				}
-				printf("%s %d\n",line[0],j);
 				chk[j] = 1;
 				cnt++;
 				break ;
@@ -113,12 +107,11 @@ void	save_textures(char	**file, t_textures	*textures)
 		i++;
 		ft_free_split(line);
 	}
-	// if (cnt != 6)
-	// {
-	// 	ft_free_split(file);
-	// 	printf("t3\n");//
-	// 	perror_exit();
-	// }
+	if (cnt != 6)
+	{
+		ft_free_split(file);
+		perror_exit();
+	}
 }
 
 void	parser(t_textures	*textures, t_info	*info, char	*arg)
