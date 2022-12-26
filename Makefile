@@ -6,15 +6,17 @@
 #    By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/18 15:40:24 by hyna              #+#    #+#              #
-#    Updated: 2022/12/26 13:25:06 by hyna             ###   ########.fr        #
+#    Updated: 2022/12/26 13:57:15 by hyna             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 CC = cc
 CCFLAGS = -Wall -Werror -Wextra
+CCFWRK = -framework OpenGL -framework AppKit
 INC_LINK = -I./incs
 LIBS = -L./libs/libft -lft\
+		-L./libs/mlx -lmlx\
 
 SRCS_DIRS = tmp # 현재의 Makefile 돌아가려면 이 메크로 필수로 필요함
 
@@ -32,7 +34,8 @@ all : $(NAME)
 
 $(NAME) : $(DIRS) $(OBJS)
 	@$(MAKE) -C ./libs/libft all
-	$(CC) $(CCFLAGS) -o $(NAME) $(OBJS)
+	@$(MAKE) -C ./libs/mlx all
+	$(CC) $(CCFWRK) $(CCFLAGS) $(LIBS) -o $(NAME) $(OBJS)
 
 $(DIRS) :
 	mkdir $(OBJS_PATH) 2> /dev/null || true
@@ -43,10 +46,12 @@ $(OBJS_PATH)/%.o : $(SRCS_PATH)/%.c
 
 clean :
 	@$(MAKE) -C ./libs/libft clean
+	@$(MAKE) -C ./libs/mlx clean
 	rm -rf $(OBJS_PATH)
 
 fclean : clean
 	rm -rf ./libs/libft/libft.a
+	rm -rf ./libs/mlx/libmlx.dylib
 	rm -rf $(NAME)
 re :
 	$(MAKE) fclean
