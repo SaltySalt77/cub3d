@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyna <hyns@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 17:10:43 by hyna              #+#    #+#             */
-/*   Updated: 2021/11/26 13:57:59 by hyna             ###   ########.fr       */
+/*   Updated: 2022/12/26 15:37:44 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@
 size_t	ft_strlen(const char	*s);
 size_t	ft_strlcat(char	*dst, const char	*src, size_t	size);
 size_t	ft_strlcpy(char	*dst, const char *src, size_t size);
+char	**ft_free_split(char **mem);
 char	*ft_itoa(int n);
 char	*ft_strchr(const char	*s, int c);
 char	*ft_strdup(const char	*s1);
 char	*ft_strjoin(char const	*s1, char const	*s2);
+char	*ft_strjoin_free(char	*s1, char *s2);
 char	*ft_strmapi(char const	*s, char (*f)(unsigned int, char));
 char	*ft_strnstr(const char	*big, const char	*little, size_t	len);
 char	**ft_split(char const	*s, char c);
