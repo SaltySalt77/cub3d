@@ -1,0 +1,12 @@
+NO ./validatefile
+SO ./validatefile
+WE ./validatefile
+EA ./validatefile
+
+F 220,123,123
+C 111,112,111
+
+1111 1111111110    >>> 벡터가 범위 안에 있지만, 공백을 만나는  경우
+1000 1000000001
+1S01 1001000001
+111111111111111

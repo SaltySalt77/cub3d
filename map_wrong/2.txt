@@ -1,0 +1,14 @@
+NO ./validatefile
+SO ./validatefile
+WE ./validatefile
+EA ./validatefile
+
+F -1,-2,123     >>>>>>>>> 256~이상의 값
+C 111,112,111
+
+11111111111111
+10000000000001
+1S000001000001
+11111111111111
+
+

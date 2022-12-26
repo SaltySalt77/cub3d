@@ -1,0 +1,16 @@
+NO ./validatefile
+SO ./validatefile
+WE ./validatefile
+EA ./validatefile
+
+F 220,123,123
+C 111,112,111
+
+11111111111111
+               >>> #맵 사이에 개행만 있는 경우
+10000000000001
+1S000001000001
+11111111111111
+
+
+
