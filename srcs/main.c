@@ -6,7 +6,7 @@
 /*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 13:17:09 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/27 15:23:15 by nhwang           ###   ########.fr       */
+/*   Updated: 2022/12/27 16:08:35 by nhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ int	main(int argc, char	**argv)
 	}
 	parser(&textures, &info, argv[1]);
 	init_game(&m_data, &textures);
+	vaildate_map(&info, &textures);
 	return (0);
 }
