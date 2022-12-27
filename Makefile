@@ -6,7 +6,7 @@
 #    By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/18 15:40:24 by hyna              #+#    #+#              #
-#    Updated: 2022/12/27 16:08:54 by hyna             ###   ########.fr        #
+#    Updated: 2022/12/27 16:51:47 by hyna             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS_NAME = main.c \
 			map_parsing/read_map.c	\
 			map_parsing/ft_split2.c	\
 			map_parsing/cut_map.c	\
+			map_parsing/validate_map.c	\
 
 SRCS_PATH = ./srcs
 SRCS = $(addprefix $(SRCS_PATH)/, $(SRCS_NAME))
