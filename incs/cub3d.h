@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:19:10 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/26 16:14:37 by hyna             ###   ########.fr       */
+/*   Updated: 2022/12/27 12:04:25 by nhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ typedef struct s_info {
 
 void	perror_exit(void);
 void	parser(t_textures	*textures, t_info	*info, char	*arg);
+char	**ft_split2(char	*str, char	*charset);
 
 #endif

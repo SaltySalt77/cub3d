@@ -6,7 +6,7 @@
 /*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:18:01 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/27 11:35:47 by nhwang           ###   ########.fr       */
+/*   Updated: 2022/12/27 12:23:39 by nhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,29 @@ int	save_textures_(t_textures	*textures, int j, char **line)
 	return 1;
 }
 
+int ft_checkline(char **line)
+{
+	if (ft_strncmp(line[0], "F", 2) && ft_strncmp(line[0], "C", 2))
+	{
+		if (line[2])
+			return (0);
+		else
+			return (1);
+	}
+	else if (!ft_strncmp(line[0], "F", 2)) //
+	{
+		return (1);
+	}
+	else if (!ft_strncmp(line[0], "C", 2))
+		return (1);
+	else
+		return (0);
+	//NO
+	//1111111
+	//NO asjfdl sdafs
+	//F 1,2
+}
+
 void	save_textures(char	**file, t_textures	*textures)
 {
 	char	*std[6];
@@ -99,8 +122,9 @@ void	save_textures(char	**file, t_textures	*textures)
 	cnt = 0;
 	while (file[i] && cnt < 6 && cnt == i)
 	{
-		line = ft_split(file[i], ' ');
-		if (!line || line[2])
+		// line = ft_split(file[i], ' ');
+		line = ft_split2(file[i], " ,");
+		if (!line || !ft_checkline(line))
 		{
 			ft_free_split(file);
 			perror_exit();

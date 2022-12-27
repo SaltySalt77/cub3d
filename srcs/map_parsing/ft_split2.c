@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split2.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/27 12:02:19 by nhwang            #+#    #+#             */
+/*   Updated: 2022/12/27 12:04:35 by nhwang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 int	is_charset(char c, char *charset)
@@ -49,7 +61,7 @@ int	ft_str_len(char *str, char *charset, int *i)
 	return (len);
 }
 
-char	**ft_split(char	*str, char	*charset)
+char	**ft_split2(char	*str, char	*charset)
 {
 	char	**result;
 	int		num;
@@ -64,13 +76,13 @@ char	**ft_split(char	*str, char	*charset)
 	result = 0;
 	result = (char **)malloc(sizeof(char *) * (num + 1));
 	if (result == 0)
-		return (NULL);
+		return (0);
 	while ((i < num) && *str)
 	{
 		len = ft_str_len(str, charset, &j);
 		result[i] = (char *)malloc(sizeof(char) * (len + 1));
 		if (result[i] == 0) ///for 문 돌면서 free 처리하기
-			return (NULL);
+			return (ft_free_split(result));
 		ft_strncpy(result[i++], (str + j - len), len);
 		str += j;
 	}
