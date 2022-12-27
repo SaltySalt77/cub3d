@@ -6,7 +6,7 @@
 /*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 13:17:09 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/27 14:44:46 by nhwang           ###   ########.fr       */
+/*   Updated: 2022/12/27 15:02:28 by nhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,18 @@ void	perror_exit(void)
 
 void	init_game(t_data *m_data, t_textures *textures)
 {
+	int	i;
+	int	wid;
+	int	hei;
+
+	i = 0;
 	m_data->mlx = mlx_init();
-	m_data->imgs[]
-	// m_data->win =
+	while (i < 4)
+	{
+		if (i == 0)
+		m_data->imgs[i].image = mlx_xpm_file_to_image(m_data->mlx, textures->filename[i],&wid, &hei);
+		i++;
+	}
 }
 
 int	main(int argc, char	**argv)
