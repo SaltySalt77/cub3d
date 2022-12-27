@@ -6,7 +6,7 @@
 /*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 12:02:19 by nhwang            #+#    #+#             */
-/*   Updated: 2022/12/27 12:04:35 by nhwang           ###   ########.fr       */
+/*   Updated: 2022/12/27 13:33:27 by nhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,19 @@ int	ft_str_len(char *str, char *charset, int *i)
 		(*i)++;
 	}
 	return (len);
+}
+
+char	*ft_strncpy(char	*dest, char	*src, unsigned int n)
+{
+	unsigned int	pos;
+	pos = 0;
+	while (pos < n)
+	{
+		dest[pos] = src[pos];
+		pos++;
+	}
+	dest[n] = 0;
+	return (dest);
 }
 
 char	**ft_split2(char	*str, char	*charset)

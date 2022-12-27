@@ -6,7 +6,7 @@
 /*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:18:01 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/27 12:23:39 by nhwang           ###   ########.fr       */
+/*   Updated: 2022/12/27 13:38:04 by nhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	save_textures_(t_textures	*textures, int j, char **line)
 
 int ft_checkline(char **line)
 {
+	int i;
 	if (ft_strncmp(line[0], "F", 2) && ft_strncmp(line[0], "C", 2))
 	{
 		if (line[2])
@@ -90,16 +91,34 @@ int ft_checkline(char **line)
 	}
 	else if (!ft_strncmp(line[0], "F", 2)) //
 	{
+		i = 0;
+		while(line[i])
+			i++;
+		if (i!=4)
+		{
+			printf("<4\n");
+			return (0);
+		}
 		return (1);
 	}
 	else if (!ft_strncmp(line[0], "C", 2))
-		return (1);
+	{
+		i = 0;
+		while(line[i])
+			i++;
+		if (i!=4)
+		{
+			printf("<4\n");
+			return (0);
+		}
+		else
+			return (1);
+	}
 	else
+	{
+		printf("no iden\n");
 		return (0);
-	//NO
-	//1111111
-	//NO asjfdl sdafs
-	//F 1,2
+	}
 }
 
 void	save_textures(char	**file, t_textures	*textures)

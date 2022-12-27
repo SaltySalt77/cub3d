@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+         #
+#    By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/18 15:40:24 by hyna              #+#    #+#              #
-#    Updated: 2022/12/27 13:15:31 by hyna             ###   ########.fr        #
+#    Updated: 2022/12/27 13:31:56 by nhwang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ LIBS = -L./libs/libft -lft\
 SRCS_DIRS = map_parsing # 현재의 Makefile 돌아가려면 이 메크로 필수로 필요함
 
 SRCS_NAME = main.c \
-			map_parsing/read_map.c
+			map_parsing/read_map.c	\
+			map_parsing/ft_split2.c
 
 SRCS_PATH = ./srcs
 SRCS = $(addprefix $(SRCS_PATH)/, $(SRCS_NAME))
