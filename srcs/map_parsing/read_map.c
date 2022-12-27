@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:18:01 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/27 15:19:10 by nhwang           ###   ########.fr       */
+/*   Updated: 2022/12/27 16:00:07 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,9 @@ void	save_textures(char	**file, t_textures	*textures)
 void	parser(t_textures	*textures, t_info	*info, char	*arg)
 {
 	char	**file;
+	int		i;
 
+	i = 0;
 	validate_filename(arg);
 	file = read_file(arg);
 	for (int i = 0; file[i]; i++)
@@ -180,10 +182,19 @@ void	parser(t_textures	*textures, t_info	*info, char	*arg)
 		printf("%s\n", file[i]);
 	}
 	save_textures(file, textures);
+	cut_map(file, info);
+	if (!info)
+	{
+		while (i < 4)
+			free(textures->filename[i++]);
+		perror_exit();
+	}
 	for (int i = 0; i < FLOOR; i++)
 		printf("%s\n",textures->filename[i]);
 	for (int i = 0; i < 3 ; i++ )
 		printf("%d\n",textures->floor[i]);
 	for (int i = 0; i < 3 ; i++ )
 		printf("%d\n",textures->ceiling[i]);
+	for (int i = 0; info->map[i]; i++)
+		printf("%s\n", info->map[i]);
 }
