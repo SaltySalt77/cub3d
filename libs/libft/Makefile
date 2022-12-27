@@ -56,6 +56,7 @@ SRCS	 =	ft_isalpha.c	\
 			get_next_line_utils.c	\
 			ft_strjoin_free.c		\
 			ft_free_split.c			\
+			count_strs.c			\
 
 OBJS = $(SRCS:.c=.o)
 
