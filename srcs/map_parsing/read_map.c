@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:18:01 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/27 14:51:32 by nhwang           ###   ########.fr       */
+/*   Updated: 2022/12/27 14:55:06 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void	save_textures(char	**file, t_textures	*textures)
 	int		i;
 	int		j;
 
-	std[0] = "NO";
+	std[NORTH] = "NO";
 	std[1] = "SO";
 	std[2] = "WE";
 	std[3] = "EA";

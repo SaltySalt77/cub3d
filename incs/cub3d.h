@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:19:10 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/27 14:36:33 by nhwang           ###   ########.fr       */
+/*   Updated: 2022/12/27 14:57:17 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,17 @@
 # include <stdio.h>
 # include "mlx.h"
 
+typedef enum e_idf {
+	NORTH = 0,
+	SOUTH = 1,
+	WEST = 2,
+	EAST = 3,
+	FLOOR = 4,
+	CEILING = 5;
+}	t_idf;
+
 typedef struct s_textures {
-	char	*north_texture;
-	char	*south_texture;
-	char	*west_texture;
-	char	*east_texture;
+	char	filename[4];
 	int		floor[3];
 	int		ceiling[3];
 }	t_textures;
