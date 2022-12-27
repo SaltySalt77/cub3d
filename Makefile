@@ -6,7 +6,7 @@
 #    By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/18 15:40:24 by hyna              #+#    #+#              #
-#    Updated: 2022/12/27 11:58:24 by hyna             ###   ########.fr        #
+#    Updated: 2022/12/27 13:15:31 by hyna             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC = cc
 CCFLAGS = #-Wall -Werror -Wextra
 CCFWRK = #-framework OpenGL -framework AppKit
 INC_LINK = -I./incs
-LIBS = -L./libs/libfttmp -lft\
+LIBS = -L./libs/libft -lft\
 		# -L./libs/mlx -lmlx\
 
 SRCS_DIRS = map_parsing # 현재의 Makefile 돌아가려면 이 메크로 필수로 필요함
