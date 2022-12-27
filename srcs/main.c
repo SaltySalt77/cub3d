@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 13:17:09 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/27 16:08:35 by nhwang           ###   ########.fr       */
+/*   Updated: 2022/12/27 17:05:26 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	main(int argc, char	**argv)
 	}
 	parser(&textures, &info, argv[1]);
 	init_game(&m_data, &textures);
-	vaildate_map(&info, &textures);
+	if (!validate_map(&info, &textures, argv[1]))
+		return (1);
 	return (0);
 }

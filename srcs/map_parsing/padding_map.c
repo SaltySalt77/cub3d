@@ -18,7 +18,7 @@ int	padding_map (char **map, t_info *info)
 		if (!temp[i])
 		{
 			ft_free_split(temp); //map에 대한 free는 일괄적으로 다른 곳에서 처리하는게 이중 free를 막을 것으로 예상되어서 하지 않았습니다.
-			return (0);
+			return (0); //호출부에서 map free
 		}
 		j = 0;
 		while (j < max_wid)
