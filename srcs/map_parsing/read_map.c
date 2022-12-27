@@ -6,7 +6,7 @@
 /*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:18:01 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/27 13:38:04 by nhwang           ###   ########.fr       */
+/*   Updated: 2022/12/27 14:51:32 by nhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,29 +59,51 @@ char	**read_file(char	*arg)
 	// count가 6미만일 때 map이 나올 경우 exit
 	// 파일 오픈 mlx_xpm ~
 	// free 잘하기
-
-int	save_textures_(t_textures	*textures, int j, char **line)
+int	save_rgb(int	*rgb, char	**line)
 {
-	char *temp;
+	int	temp;
+	int	i;
 
-	temp = ft_strdup(line);
-	if (!temp)
-		return 0;
-	if (j==0)
-		textures->north_texture = temp;
-	else if(j==1)
-		textures->south_texture = temp;
-	else if (j==2)
-		textures->west_texture = temp;
-	else if (j==3)
-		textures->east_texture = temp;
-	/// scope ㅂㅜㄴ기 처처리
-	return 1;
+	i = 1;
+	while (i < 4)
+	{
+		temp = ft_atoi(line[i]);
+		if (temp < 0 || temp > 255)
+			return (0);
+		rgb[i - 1] = temp;
+		i++;
+	}
+	return (1);
 }
 
-int ft_checkline(char **line)
+
+int	save_textures2(t_textures	*textures, int j, char **line)
 {
-	int i;
+	char	*temp;
+
+	if (j < 4)
+	{
+		temp = ft_strdup(line[1]);
+		if (!temp)
+			return 0;
+		if (j==0)
+			textures->north_texture = temp;
+		else if(j==1)
+			textures->south_texture = temp;
+		else if (j==2)
+			textures->west_texture = temp;
+		else if (j==3)
+			textures->east_texture = temp;
+		return (1);
+	}
+	else if (j == 4)
+		return (save_rgb(textures->floor, line));
+	else
+		return (save_rgb(textures->ceiling, line));
+}
+
+int	ft_checkline(char **line)
+{
 	if (ft_strncmp(line[0], "F", 2) && ft_strncmp(line[0], "C", 2))
 	{
 		if (line[2])
@@ -89,36 +111,12 @@ int ft_checkline(char **line)
 		else
 			return (1);
 	}
-	else if (!ft_strncmp(line[0], "F", 2)) //
-	{
-		i = 0;
-		while(line[i])
-			i++;
-		if (i!=4)
-		{
-			printf("<4\n");
-			return (0);
-		}
+	else if (!ft_strncmp(line[0], "F", 2) && count_strs(line) == 4)
 		return (1);
-	}
-	else if (!ft_strncmp(line[0], "C", 2))
-	{
-		i = 0;
-		while(line[i])
-			i++;
-		if (i!=4)
-		{
-			printf("<4\n");
-			return (0);
-		}
-		else
-			return (1);
-	}
+	else if (!ft_strncmp(line[0], "C", 2) && count_strs(line) == 4)
+		return (1);
 	else
-	{
-		printf("no iden\n");
 		return (0);
-	}
 }
 
 void	save_textures(char	**file, t_textures	*textures)
@@ -160,7 +158,7 @@ void	save_textures(char	**file, t_textures	*textures)
 					perror_exit();
 				}
 				chk[j] = 1;
-				cnt+=(save_textures_(textures, j, line[1]));
+				cnt+=(save_textures2(textures, j, line));
 				break ;
 			}
 			j++;
@@ -186,4 +184,12 @@ void	parser(t_textures	*textures, t_info	*info, char	*arg)
 		printf("%s\n", file[i]);
 	}
 	save_textures(file, textures);
+	printf("%s\n",textures->east_texture);
+	printf("%s\n",textures->west_texture);
+	printf("%s\n",textures->north_texture);
+	printf("%s\n",textures->south_texture);
+	for (int i = 0; i < 3 ; i++ )
+		printf("%d\n",textures->floor[i]);
+	for (int i = 0; i < 3 ; i++ )
+		printf("%d\n",textures->ceiling[i]);
 }
