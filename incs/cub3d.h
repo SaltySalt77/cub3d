@@ -26,6 +26,7 @@ typedef struct s_textures {
 typedef struct s_info {
 	char	**map;
 	int		max_wid;
+	int		max_hei;
 	int		pos_x;
 	int		pos_y;
 }	t_info;

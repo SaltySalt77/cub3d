@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:18:01 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/27 15:01:56 by hyna             ###   ########.fr       */
+/*   Updated: 2022/12/27 15:19:10 by nhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,10 @@ int	ft_checkline(char **line)
 	if (ft_strncmp(line[0], "F", 2) && ft_strncmp(line[0], "C", 2))
 	{
 		if (line[2])
+		{
+			ft_free_split(line);
 			return (0);
+		}
 		else
 			return (1);
 	}
@@ -108,8 +111,8 @@ int	ft_checkline(char **line)
 		return (1);
 	else if (!ft_strncmp(line[0], "C", 2) && count_strs(line) == 4)
 		return (1);
-	else
-		return (0);
+	ft_free_split(line);
+	return (0);
 }
 
 void	save_textures(char	**file, t_textures	*textures)
