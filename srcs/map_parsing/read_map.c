@@ -6,7 +6,7 @@
 /*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:18:01 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/27 14:55:06 by hyna             ###   ########.fr       */
+/*   Updated: 2022/12/27 15:01:56 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,8 @@ int	save_textures2(t_textures	*textures, int j, char **line)
 	{
 		temp = ft_strdup(line[1]);
 		if (!temp)
-			return 0;
-		if (j==0)
-			textures->north_texture = temp;
-		else if(j==1)
-			textures->south_texture = temp;
-		else if (j==2)
-			textures->west_texture = temp;
-		else if (j==3)
-			textures->east_texture = temp;
+			return (0);
+		textures->filename[j] = temp;
 		return (1);
 	}
 	else if (j == 4)
@@ -129,11 +122,11 @@ void	save_textures(char	**file, t_textures	*textures)
 	int		j;
 
 	std[NORTH] = "NO";
-	std[1] = "SO";
-	std[2] = "WE";
-	std[3] = "EA";
-	std[4] = "F";
-	std[5] = "C";
+	std[SOUTH] = "SO";
+	std[WEST] = "WE";
+	std[EAST] = "EA";
+	std[FLOOR] = "F";
+	std[CEILING] = "C";
 	ft_bzero(chk, 6 * (sizeof(int)));
 	i = 0;
 	cnt = 0;
@@ -184,10 +177,8 @@ void	parser(t_textures	*textures, t_info	*info, char	*arg)
 		printf("%s\n", file[i]);
 	}
 	save_textures(file, textures);
-	printf("%s\n",textures->east_texture);
-	printf("%s\n",textures->west_texture);
-	printf("%s\n",textures->north_texture);
-	printf("%s\n",textures->south_texture);
+	for (int i = 0; i < FLOOR; i++)
+		printf("%s\n",textures->filename[i]);
 	for (int i = 0; i < 3 ; i++ )
 		printf("%d\n",textures->floor[i]);
 	for (int i = 0; i < 3 ; i++ )

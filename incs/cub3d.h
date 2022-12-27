@@ -6,7 +6,7 @@
 /*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:19:10 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/27 14:57:17 by hyna             ###   ########.fr       */
+/*   Updated: 2022/12/27 15:03:24 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ typedef enum e_idf {
 	WEST = 2,
 	EAST = 3,
 	FLOOR = 4,
-	CEILING = 5;
+	CEILING = 5
 }	t_idf;
 
 typedef struct s_textures {
-	char	filename[4];
+	char	*filename[4];
 	int		floor[3];
 	int		ceiling[3];
 }	t_textures;
