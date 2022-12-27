@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/26 13:17:09 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/26 16:10:17 by hyna             ###   ########.fr       */
+/*   Created: 2022/05/14 18:18:41 by hyna              #+#    #+#             */
+/*   Updated: 2022/05/14 18:23:07 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
-void	perror_exit(void)
-{
-	perror("Error\n");
-	exit(1);
-}
+# include <unistd.h>
+# include <stdlib.h>
+# include <limits.h>
 
-int	main(int argc, char	**argv)
-{
-	t_textures	textures;
-	t_info		info;
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
-	if (argc != 2)
-	{
-		perror("Error\n");
-		return (1);
-	}
-	parser(&textures, &info, argv[1]);
-	return (0);
-}
+char	*ft_strchr(const char *s, int c);
+char	*get_next_line(int fd);
+char	*free_str(char	*s);
+size_t	ft_strlen(const char *s);
+
+#endif

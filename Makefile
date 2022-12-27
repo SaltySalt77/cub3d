@@ -6,21 +6,22 @@
 #    By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/18 15:40:24 by hyna              #+#    #+#              #
-#    Updated: 2022/12/26 13:57:15 by hyna             ###   ########.fr        #
+#    Updated: 2022/12/26 16:15:10 by hyna             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 CC = cc
-CCFLAGS = -Wall -Werror -Wextra
-CCFWRK = -framework OpenGL -framework AppKit
+CCFLAGS = #-Wall -Werror -Wextra
+CCFWRK = #-framework OpenGL -framework AppKit
 INC_LINK = -I./incs
 LIBS = -L./libs/libft -lft\
-		-L./libs/mlx -lmlx\
+		# -L./libs/mlx -lmlx\
 
-SRCS_DIRS = tmp # 현재의 Makefile 돌아가려면 이 메크로 필수로 필요함
+SRCS_DIRS = map_parsing # 현재의 Makefile 돌아가려면 이 메크로 필수로 필요함
 
 SRCS_NAME = main.c \
+			map_parsing/read_map.c
 
 SRCS_PATH = ./srcs
 SRCS = $(addprefix $(SRCS_PATH)/, $(SRCS_NAME))
