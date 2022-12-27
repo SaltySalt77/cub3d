@@ -52,6 +52,7 @@ void	cut_map(char	**file, t_info	*info);
 void	perror_exit(void);
 void	parser(t_textures	*textures, t_info	*info, char	*arg);
 char	**ft_split2(char	*str, char	*charset);
+int	padding_map(char **map, t_info *info);
 int		validate_map(t_info *info, t_textures *textures, char	*filename);
 
 #endif

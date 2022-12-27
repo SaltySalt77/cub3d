@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+         #
+#    By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/18 15:40:24 by hyna              #+#    #+#              #
-#    Updated: 2022/12/27 16:51:47 by hyna             ###   ########.fr        #
+#    Updated: 2022/12/27 17:16:39 by nhwang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS_NAME = main.c \
 			map_parsing/ft_split2.c	\
 			map_parsing/cut_map.c	\
 			map_parsing/validate_map.c	\
+			map_parsing/padding_map.c	\
 
 SRCS_PATH = ./srcs
 SRCS = $(addprefix $(SRCS_PATH)/, $(SRCS_NAME))

@@ -84,18 +84,19 @@ int	count_map(char **map, t_info *info)
 		j = 0;
 		while (map[i][j])
 		{
-			if (check_c(map[i][j], chk_dir) != 1)
+			if (check_c(map[i][j], chk_dir) == 1)
 			{
 				if ((map[i][j]) == 'N')
-					info.dir = 0;
+					info->dir = 0;
 				else if ((map[i][j]) == 'S')
-					info.dir = 1;
+					info->dir = 1;
 				else if ((map[i][j]) == 'E')
-					info.dir = 2;
+					info->dir = 2;
 				else if ((map[i][j]) == 'W')
-					info.dir = 3;
+					info->dir = 3;
+				chk_dir = 1;
 			}
-			else
+			else if (!check_c(map[i][j], chk_dir))
 				return (0);
 			j++;
 		}

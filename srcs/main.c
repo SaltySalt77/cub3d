@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 13:17:09 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/27 17:05:26 by hyna             ###   ########.fr       */
+/*   Updated: 2022/12/27 17:18:01 by nhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,9 @@ int	main(int argc, char	**argv)
 	init_game(&m_data, &textures);
 	if (!validate_map(&info, &textures, argv[1]))
 		return (1);
+	printf("=========\n");
+	padding_map(info.map, &info);
+	for (int i = 0; info.map[i]; i++)
+		printf("%s | \n",info.map[i]);
 	return (0);
 }
