@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:18:01 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/26 17:03:19 by hyna             ###   ########.fr       */
+/*   Updated: 2022/12/27 11:35:47 by nhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 	// 파일 .cub로 끝나는 지 확인
 	// 파일 열고 -> open 함수 예외처리
 	// 파일 다 읽어오기 2중 배열
@@ -61,6 +60,25 @@ char	**read_file(char	*arg)
 	// 파일 오픈 mlx_xpm ~
 	// free 잘하기
 
+int	save_textures_(t_textures	*textures, int j, char **line)
+{
+	char *temp;
+
+	temp = ft_strdup(line);
+	if (!temp)
+		return 0;
+	if (j==0)
+		textures->north_texture = temp;
+	else if(j==1)
+		textures->south_texture = temp;
+	else if (j==2)
+		textures->west_texture = temp;
+	else if (j==3)
+		textures->east_texture = temp;
+	/// scope ㅂㅜㄴ기 처처리
+	return 1;
+}
+
 void	save_textures(char	**file, t_textures	*textures)
 {
 	char	*std[6];
@@ -99,7 +117,7 @@ void	save_textures(char	**file, t_textures	*textures)
 					perror_exit();
 				}
 				chk[j] = 1;
-				cnt++;
+				cnt+=(save_textures_(textures, j, line[1]));
 				break ;
 			}
 			j++;

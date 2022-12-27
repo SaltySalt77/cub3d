@@ -1,7 +1,7 @@
 SO ./path_to_the_south_texture
 WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
-C 222,222,2
+EA ./path_to_the_eat_texture
+C           222,222,2
 
 
 
