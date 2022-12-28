@@ -1,4 +1,3 @@
-
 #include "cub3d.h"
 
 void	cut_map(char	**file, t_info	*info)

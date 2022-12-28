@@ -6,7 +6,7 @@
 #    By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/18 15:40:24 by hyna              #+#    #+#              #
-#    Updated: 2022/12/28 14:38:07 by nhwang           ###   ########.fr        #
+#    Updated: 2022/12/28 15:49:59 by nhwang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ SRCS_NAME = main.c \
 			map_parsing/validate_map.c	\
 			map_parsing/padding_map.c	\
 			map_parsing/check_vec.c	\
+			map_parsing/save_texture.c	\
+			map_parsing/validate_map2.c	\
 
 SRCS_PATH = ./srcs
 SRCS = $(addprefix $(SRCS_PATH)/, $(SRCS_NAME))

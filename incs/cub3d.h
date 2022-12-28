@@ -1,4 +1,3 @@
-
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -54,6 +53,9 @@ void	parser(t_textures	*textures, t_info	*info, char	*arg);
 char	**ft_split2(char	*str, char	*charset);
 int		padding_map(t_info *info);
 int		validate_map(t_info *info, t_textures *textures, char	*filename);
-int check_vec(t_info *info);
+int		check_vec(t_info *info);
+void	assort_textures(char **file, t_textures	*textures, char	*std[6]);
+int		save_rgb(int	*rgb, char	**line);
+int		validate_newline(char	*filename, t_info	*info);
 
 #endif

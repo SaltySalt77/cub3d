@@ -40,7 +40,7 @@ int	main(int argc, char	**argv)
 		return (1);
 	}
 	parser(&textures, &info, argv[1]);
-	init_game(&m_data, &textures);
+	// init_game(&m_data, &textures);
 	if (!validate_map(&info, &textures, argv[1]))
 		return (1);
 	printf("=========\n"); //

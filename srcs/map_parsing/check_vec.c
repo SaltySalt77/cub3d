@@ -23,10 +23,7 @@ int	check_vec_util(t_info *info, int y, int x)
 		dx = nx[idx] + x;
 		if (dy < 0 || dx < 0 || dy >= info->max_hei || dx >= info->max_wid
 			|| info->map[dy][dx] == ' ')
-		{
-			printf("%d, %d : out \n",dy,dx);//
 			perror_exit();
-		}
 		idx++;
 	}
 	return (1);
@@ -54,6 +51,5 @@ int	check_vec(t_info *info)
 		}
 		y++;
 	}
-	printf("validate map!\n");///
 	return (1);
 }
