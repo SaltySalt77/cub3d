@@ -6,7 +6,7 @@
 /*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:18:01 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/27 16:28:43 by nhwang           ###   ########.fr       */
+/*   Updated: 2022/12/28 11:35:23 by nhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int	save_rgb(int	*rgb, char	**line)
 	}
 	return (1);
 }
-
 
 int	save_textures2(t_textures	*textures, int j, char **line)
 {
