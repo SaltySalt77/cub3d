@@ -43,7 +43,7 @@ int	check_vec(t_info *info)
 		x = 0;
 		while (info->map[y][x])
 		{
-			if (info->map[y][x] != '0')
+			if (info->map[y][x] == '1' || info->map[y][x] == ' ')
 			{
 				x++;
 				continue ;
