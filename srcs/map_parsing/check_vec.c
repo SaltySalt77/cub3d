@@ -25,7 +25,7 @@ int	check_vec_util(t_info *info, int y, int x)
 			|| info->map[dy][dx] == ' ')
 		{
 			printf("%d, %d : out \n",dy,dx);//
-			return (0);
+			perror_exit();
 		}
 		idx++;
 	}

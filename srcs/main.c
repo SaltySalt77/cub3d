@@ -4,6 +4,7 @@
 void	perror_exit(void)
 {
 	perror("Error\n");
+	system("leaks cub3D | grep leaks");
 	exit(1);
 }
 
@@ -34,6 +35,7 @@ int	main(int argc, char	**argv)
 	if (argc != 2)
 	{
 		perror("Error\n");
+		system("leaks cub3D");
 		return (1);
 	}
 	parser(&textures, &info, argv[1]);
@@ -45,5 +47,6 @@ int	main(int argc, char	**argv)
 	for (int i = 0; info.map[i]; i++)
 		printf("%s | \n",info.map[i]);
 	check_vec(&info);
+	system("leaks cub3D |  grep leaks");
 	return (0);
 }

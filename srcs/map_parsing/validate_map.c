@@ -115,9 +115,13 @@ int	count_map(char **map, t_info *info)
 int	validate_map(t_info *info, t_textures *textures, char	*filename)
 {
 	if (!count_map(info->map, info) || !(validate_textures(textures)))
-		return (0); //(main 주석 참조.) main의 init_game에서 사용하고 있는 캐릭터 프리 해줘야함.
+	{
+		perror_exit();
+		 //(main 주석 참조.) main의 init_game에서 사용하고 있는 캐릭터 프리 해줘야함.
+	}
 	if (!validate_newline(filename, info))
-		return (0);
+		perror_exit();;
+
 	// if (!padding_map(info->map, info))
 	// 	return (1);
 	//padding 까지 다 된 후에 벡터 체크해야 validate가 비로소 끝난다.

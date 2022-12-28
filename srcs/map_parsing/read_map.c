@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:18:01 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/28 13:43:35 by hyna             ###   ########.fr       */
+/*   Updated: 2022/12/28 14:43:13 by nhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,41 @@ char	**read_file(char	*arg)
 	// count가 6미만일 때 map이 나올 경우 exit
 	// 파일 오픈 mlx_xpm ~
 	// free 잘하기
+int	validate_arguments(char	**argv)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	while (argv[i])
+	{
+		j = 0;
+		while (argv[i][j])
+		{
+			if (j == 0)
+			{
+				if (ft_isdigit(argv[i][j]) == 0 && argv[i][j] != '+')
+					return (0);
+				else if (argv[i][j] == '+' && argv[i][j + 1] == 0)
+					return (0);
+			}
+			else if (!ft_isdigit(argv[i][j]))
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
 int	save_rgb(int	*rgb, char	**line)
 {
 	int	temp;
 	int	i;
 
 	i = 1;
+	if (!validate_arguments(line))
+		return (0);
 	while (i < 4)
 	{
 		temp = ft_atoi(line[i]);
@@ -88,7 +117,7 @@ int	save_textures2(t_textures	*textures, int j, char **line)
 		textures->filename[j] = temp;
 		return (1);
 	}
-	else if (j == 4)
+	else if (j == FLOOR)
 		return (save_rgb(textures->floor, line));
 	else
 		return (save_rgb(textures->ceiling, line));
@@ -144,6 +173,12 @@ int	verify_idf(char	**file, char	**line, char	*std[6], int	*chk)
 			break ;
 		}
 	}
+	if (j >= 6)
+	{
+		ft_free_split(file);
+		ft_free_split(line);
+		perror_exit();
+	}
 	return (j);
 }
 
@@ -192,7 +227,7 @@ void	parser(t_textures	*textures, t_info	*info, char	*arg)
 	// }
 	assort_textures(file, textures, std);
 	cut_map(file, info);
-	if (!info)
+	if (!info->map)
 	{
 		while (i < 4)
 			free(textures->filename[i++]);
