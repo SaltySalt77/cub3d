@@ -6,7 +6,7 @@
 /*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:18:01 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/28 11:59:45 by hyna             ###   ########.fr       */
+/*   Updated: 2022/12/28 13:43:35 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,13 +125,34 @@ void	init_vars(char	*std[6], int	chk[6])
 	ft_bzero(chk, 6 * (sizeof(int)));
 }
 
+int	verify_idf(char	**file, char	**line, char	*std[6], int	*chk)
+{
+	int		j;
+
+	j = -1;
+	while (++j < 6)
+	{
+		if (!ft_strncmp(line[0], std[j], ft_strlen(std[j])))
+		{
+			if (chk[j] || ft_strlen(line[0]) != ft_strlen(std[j]))
+			{
+				ft_free_split(file);
+				ft_free_split(line);
+				perror_exit();
+			}
+			chk[j] = 1;
+			break ;
+		}
+	}
+	return (j);
+}
+
 void	assort_textures(char	**file, t_textures	*textures, char	*std[6])
 {
 	char	**line;
 	int		cnt;
 	int		chk[6];
 	int		i;
-	int		j;
 
 	i = 0;
 	cnt = 0;
@@ -144,23 +165,9 @@ void	assort_textures(char	**file, t_textures	*textures, char	*std[6])
 			ft_free_split(file);
 			perror_exit();
 		}
-		j = -1;
-		while (++j < 6)
-		{
-			if (!ft_strncmp(line[0], std[j], ft_strlen(std[j])))
-			{
-				if (chk[j] || ft_strlen(line[0]) != ft_strlen(std[j]))
-				{
-					ft_free_split(file);
-					ft_free_split(line);
-					perror_exit();
-				}
-				chk[j] = 1;
-				cnt += (save_textures2(textures, j, line));
-				break ;
-			}
-		}
 		i++;
+		cnt += (save_textures2(textures,
+					verify_idf(file, line, std, chk), line));
 		ft_free_split(line);
 	}
 	if (cnt != 6)
