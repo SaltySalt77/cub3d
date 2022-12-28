@@ -107,7 +107,9 @@ int	count_map(char **map, t_info *info)
 		i++;
 	}
 	info->max_hei = i;
-	return (1);
+	if (chk_dir) //Player dir이 있는 경우에만 참.
+		return (1);
+	return (0);
 }
 
 int	validate_map(t_info *info, t_textures *textures, char	*filename)

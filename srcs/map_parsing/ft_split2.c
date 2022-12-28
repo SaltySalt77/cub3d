@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 12:02:19 by nhwang            #+#    #+#             */
-/*   Updated: 2022/12/28 11:05:20 by hyna             ###   ########.fr       */
+/*   Updated: 2022/12/28 11:36:21 by nhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	**ft_split2(char	*str, char	*charset)
 	{
 		len = ft_str_len(str, charset, &j);
 		result[i] = (char *)malloc(sizeof(char) * (len + 1));
-		if (result[i] == 0) ///for 문 돌면서 free 처리하기
+		if (result[i] == 0)
 			return (ft_free_split(result));
 		ft_strncpy(result[i++], (str + j - len), len);
 		str += j;
