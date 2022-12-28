@@ -31,7 +31,7 @@ int	main(int argc, char	**argv)
 {
 	t_textures	textures;
 	t_info		info;
-	t_data		m_data;
+	// t_data		m_data;
 
 	if (argc != 2)
 	{
@@ -41,7 +41,7 @@ int	main(int argc, char	**argv)
 	}
 	parser(&textures, &info, argv[1]);
 	// init_game(&m_data, &textures);
-	if (!validate_map(&info, &textures, argv[1]))
+	if (!validate_map(&info, argv[1]))
 		return (1);
 	printf("=========\n"); //
 	padding_map(&info);

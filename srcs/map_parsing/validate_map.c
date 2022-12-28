@@ -54,7 +54,7 @@ int	count_map(char **map, t_info *info)
 	return (chk_dir);
 }
 
-int	validate_map(t_info *info, t_textures *textures, char	*filename)
+int	validate_map(t_info *info, char	*filename)
 {
 	if (!count_map(info->map, info))
 		perror_exit();
