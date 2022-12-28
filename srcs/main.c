@@ -21,9 +21,10 @@ void	init_game(t_data *m_data, t_textures *textures)
 		if (i == 0)
 		m_data->imgs[i].image = mlx_xpm_file_to_image(m_data->mlx,
 					textures->filename[i], &wid, &hei);
+		if (!m_data->imgs[i].image)
+			perror_exit();
 		i++;
 	}
-	//ㄴㅏ중에 map val >> 이중 str free
 }
 
 int	main(int argc, char	**argv)

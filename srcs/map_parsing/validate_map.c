@@ -42,20 +42,6 @@ int	validate_newline(char	*filename, t_info	*info)
 	return (1);
 }
 
-int	validate_textures(t_textures *textures)
-{
-	int	i;
-
-	i = 0;
-	while (i < 4)
-	{
-		if (textures->filename[i] == 0)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 int	check_c(char c, int chk_dir)
 {
 	if (c == '0' || c == '1' || c == ' ')
@@ -114,7 +100,7 @@ int	count_map(char **map, t_info *info)
 
 int	validate_map(t_info *info, t_textures *textures, char	*filename)
 {
-	if (!count_map(info->map, info) || !(validate_textures(textures)))
+	if (!count_map(info->map, info))
 	{
 		perror_exit();
 		 //(main 주석 참조.) main의 init_game에서 사용하고 있는 캐릭터 프리 해줘야함.
