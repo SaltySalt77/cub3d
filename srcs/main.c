@@ -6,7 +6,7 @@
 /*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 13:17:09 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/27 17:18:01 by nhwang           ###   ########.fr       */
+/*   Updated: 2022/12/28 11:30:27 by nhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ int	main(int argc, char	**argv)
 	padding_map(info.map, &info);
 	for (int i = 0; info.map[i]; i++)
 		printf("%s | \n",info.map[i]);
+	check_vec(&info);
 	return (0);
 }
