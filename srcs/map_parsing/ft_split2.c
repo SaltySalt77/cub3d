@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 12:02:19 by nhwang            #+#    #+#             */
-/*   Updated: 2022/12/27 13:33:27 by nhwang           ###   ########.fr       */
+/*   Updated: 2022/12/28 11:05:20 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	ft_str_len(char *str, char *charset, int *i)
 char	*ft_strncpy(char	*dest, char	*src, unsigned int n)
 {
 	unsigned int	pos;
+
 	pos = 0;
 	while (pos < n)
 	{

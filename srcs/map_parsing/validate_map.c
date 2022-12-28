@@ -69,14 +69,26 @@ int	check_c(char c, int chk_dir)
 	return (0);
 }
 
+void	save_chara_dir(char dir, t_info	*info, int	*chk_dir)
+{
+	if (dir == 'N')
+		info->dir = 0;
+	else if (dir == 'S')
+		info->dir = 1;
+	else if (dir == 'E')
+		info->dir = 2;
+	else if (dir == 'W')
+		info->dir = 3;
+	*chk_dir = 1;
+}
+
 int	count_map(char **map, t_info *info)
 {
-	int	m_w;
 	int	i;
 	int	j;
 	int	chk_dir;
 
-	m_w = 0;
+	info->max_wid = 0;
 	i = 0;
 	chk_dir = 0;
 	while (map[i])
@@ -85,29 +97,17 @@ int	count_map(char **map, t_info *info)
 		while (map[i][j])
 		{
 			if (check_c(map[i][j], chk_dir) == 1)
-			{
-				if ((map[i][j]) == 'N')
-					info->dir = 0;
-				else if ((map[i][j]) == 'S')
-					info->dir = 1;
-				else if ((map[i][j]) == 'E')
-					info->dir = 2;
-				else if ((map[i][j]) == 'W')
-					info->dir = 3;
-				chk_dir = 1;
-			}
+				save_chara_dir(map[i][j], info, &chk_dir);
 			else if (!check_c(map[i][j], chk_dir))
 				return (0);
 			j++;
 		}
-		if (j > m_w)
-			m_w = j;
+		if (j > info->max_wid)
+			info->max_wid = j;
 		i++;
 	}
 	info->max_hei = i;
-	info->max_wid = m_w;
 	return (1);
-	//0,1,N,S,E,W,Space >> N,S,E,W >>는 플레이어의 방향이므로 무조건 한 개
 }
 
 int	validate_map(t_info *info, t_textures *textures, char	*filename)
