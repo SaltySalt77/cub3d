@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:18:01 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/28 11:35:23 by nhwang           ###   ########.fr       */
+/*   Updated: 2022/12/28 13:43:35 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,15 +114,8 @@ int	ft_checkline(char **line)
 	return (0);
 }
 
-void	save_textures(char	**file, t_textures	*textures)
+void	init_vars(char	*std[6], int	chk[6])
 {
-	char	*std[6];
-	char	**line;
-	int 	cnt;
-	int 	chk[6];
-	int		i;
-	int		j;
-
 	std[NORTH] = "NO";
 	std[SOUTH] = "SO";
 	std[WEST] = "WE";
@@ -130,35 +123,51 @@ void	save_textures(char	**file, t_textures	*textures)
 	std[FLOOR] = "F";
 	std[CEILING] = "C";
 	ft_bzero(chk, 6 * (sizeof(int)));
+}
+
+int	verify_idf(char	**file, char	**line, char	*std[6], int	*chk)
+{
+	int		j;
+
+	j = -1;
+	while (++j < 6)
+	{
+		if (!ft_strncmp(line[0], std[j], ft_strlen(std[j])))
+		{
+			if (chk[j] || ft_strlen(line[0]) != ft_strlen(std[j]))
+			{
+				ft_free_split(file);
+				ft_free_split(line);
+				perror_exit();
+			}
+			chk[j] = 1;
+			break ;
+		}
+	}
+	return (j);
+}
+
+void	assort_textures(char	**file, t_textures	*textures, char	*std[6])
+{
+	char	**line;
+	int		cnt;
+	int		chk[6];
+	int		i;
+
 	i = 0;
 	cnt = 0;
+	init_vars(std, chk);
 	while (file[i] && cnt < 6 && cnt == i)
 	{
-		// line = ft_split(file[i], ' ');
 		line = ft_split2(file[i], " ,");
 		if (!line || !ft_checkline(line))
 		{
 			ft_free_split(file);
 			perror_exit();
 		}
-		j = 0;
-		while (j < 6)
-		{
-			if (!ft_strncmp(line[0], std[j], ft_strlen(std[j])))
-			{
-				if (chk[j] || ft_strlen(line[0]) != ft_strlen(std[j]))
-				{
-					ft_free_split(file);
-					ft_free_split(line);
-					perror_exit();
-				}
-				chk[j] = 1;
-				cnt+=(save_textures2(textures, j, line));
-				break ;
-			}
-			j++;
-		}
 		i++;
+		cnt += (save_textures2(textures,
+					verify_idf(file, line, std, chk), line));
 		ft_free_split(line);
 	}
 	if (cnt != 6)
@@ -170,17 +179,18 @@ void	save_textures(char	**file, t_textures	*textures)
 
 void	parser(t_textures	*textures, t_info	*info, char	*arg)
 {
+	char	*std[6];
 	char	**file;
 	int		i;
 
 	i = 0;
 	validate_filename(arg);
 	file = read_file(arg);
-	for (int i = 0; file[i]; i++)
-	{
-		printf("%s\n", file[i]);
-	}
-	save_textures(file, textures);
+	// for (int i = 0; file[i]; i++)
+	// {
+	// 	printf("%s\n", file[i]);
+	// }
+	assort_textures(file, textures, std);
 	cut_map(file, info);
 	if (!info)
 	{
