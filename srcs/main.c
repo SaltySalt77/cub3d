@@ -1,9 +1,14 @@
-
 #include "cub3d.h"
 
-void	perror_exit(void)
+void	perror_exit(char *err_msg)
 {
-	perror("Error\n");
+	if (!err_msg)
+	{
+		perror("Error\n");
+		exit(1);
+	}
+	ft_putendl_fd("Error", 2);
+	ft_putendl_fd(err_msg, 2);
 	system("leaks cub3D | grep leaks");
 	exit(1);
 }
@@ -22,7 +27,7 @@ void	init_game(t_data *m_data, t_textures *textures)
 		m_data->imgs[i].image = mlx_xpm_file_to_image(m_data->mlx,
 					textures->filename[i], &wid, &hei);
 		if (!m_data->imgs[i].image)
-			perror_exit();
+			perror_exit("No search file or diretory");
 		i++;
 	}
 }

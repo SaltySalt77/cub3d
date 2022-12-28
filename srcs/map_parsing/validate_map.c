@@ -57,8 +57,8 @@ int	count_map(char **map, t_info *info)
 int	validate_map(t_info *info, char	*filename)
 {
 	if (!count_map(info->map, info))
-		perror_exit();
+		perror_exit("Invalid map element");
 	if (!validate_newline(filename, info))
-		perror_exit();
+		perror_exit("Invalid map");
 	return (1);
 }

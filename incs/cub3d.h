@@ -48,7 +48,7 @@ typedef struct s_data {
 }	t_data;
 
 void	cut_map(char	**file, t_info	*info);
-void	perror_exit(void);
+void	perror_exit(char *err_msg);
 void	parser(t_textures	*textures, t_info	*info, char	*arg);
 char	**ft_split2(char	*str, char	*charset);
 int		padding_map(t_info *info);

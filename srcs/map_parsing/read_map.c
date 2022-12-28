@@ -6,7 +6,7 @@
 /*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:18:01 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/28 15:42:20 by nhwang           ###   ########.fr       */
+/*   Updated: 2022/12/28 16:21:05 by nhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	validate_filename(char	*filename)
 
 	len = ft_strlen(filename);
 	if (len < 4)
-		perror_exit();
+		perror_exit("Invalid File Name");
 	if (ft_strncmp(filename + (len - 4), ".cub", 5))
-		perror_exit();
+		perror_exit("Invalid File Name");
 }
 
 char	**read_file(char	*arg)
@@ -33,7 +33,7 @@ char	**read_file(char	*arg)
 	file = NULL;
 	fd = open(arg, O_RDONLY, 0666);
 	if (fd < 0)
-		perror_exit();
+		perror_exit(NULL);
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -44,7 +44,7 @@ char	**read_file(char	*arg)
 	file_splited = ft_split(file, '\n');
 	free(file);
 	if (!file_splited)
-		perror_exit();
+		perror_exit(NULL);
 	close(fd);
 	return (file_splited);
 }
@@ -110,6 +110,6 @@ void	parser(t_textures	*textures, t_info	*info, char	*arg)
 	{
 		while (i < 4)
 			free(textures->filename[i++]);
-		perror_exit();
+		perror_exit(NULL);
 	}
 }

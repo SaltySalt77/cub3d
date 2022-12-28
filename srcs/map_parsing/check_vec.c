@@ -23,7 +23,7 @@ int	check_vec_util(t_info *info, int y, int x)
 		dx = nx[idx] + x;
 		if (dy < 0 || dx < 0 || dy >= info->max_hei || dx >= info->max_wid
 			|| info->map[dy][dx] == ' ')
-			perror_exit();
+			perror_exit("The map must be surrounded by Wall");
 		idx++;
 	}
 	return (1);

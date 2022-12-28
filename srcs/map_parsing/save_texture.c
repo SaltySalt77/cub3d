@@ -62,7 +62,7 @@ int	verify_idf(char	**file, char	**line, char	*std[6], int	*chk)
 			{
 				ft_free_split(file);
 				ft_free_split(line);
-				perror_exit();
+				perror_exit("Invalid identifier");
 			}
 			chk[j] = 1;
 			break ;
@@ -72,7 +72,7 @@ int	verify_idf(char	**file, char	**line, char	*std[6], int	*chk)
 	{
 		ft_free_split(file);
 		ft_free_split(line);
-		perror_exit();
+		perror_exit("Invalid identifier");
 	}
 	return (j);
 }
@@ -93,7 +93,7 @@ void	assort_textures(char **file, t_textures	*textures, char	*std[6])
 		if (!line || !ft_checkline(line))
 		{
 			ft_free_split(file);
-			perror_exit();
+			perror_exit("Invalid identifier");
 		}
 		cnt += (save_textures2(textures,
 					verify_idf(file, line, std, chk), line));
@@ -102,6 +102,6 @@ void	assort_textures(char **file, t_textures	*textures, char	*std[6])
 	if (cnt != 6)
 	{
 		ft_free_split(file);
-		perror_exit();
+		perror_exit("Invalid identifier");
 	}
 }

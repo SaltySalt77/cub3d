@@ -6,7 +6,7 @@
 /*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 11:17:54 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/28 15:54:09 by nhwang           ###   ########.fr       */
+/*   Updated: 2022/12/28 16:18:43 by nhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	padding_map(t_info *info)
 
 	temp = ft_calloc(info->max_hei + 1, sizeof(char *));
 	if (!temp)
-		perror_exit();
+		perror_exit(NULL);
 	i = 0;
 	while (info->map[i])
 	{
@@ -47,7 +47,7 @@ int	padding_map(t_info *info)
 		if (!temp[i])
 		{
 			ft_free_split(temp);
-			perror_exit();
+			perror_exit(NULL);
 		}
 		pad_space(temp, info, i);
 		i++;
