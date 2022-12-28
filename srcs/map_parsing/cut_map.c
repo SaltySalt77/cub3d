@@ -6,7 +6,7 @@
 /*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:43:14 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/27 16:03:49 by hyna             ###   ########.fr       */
+/*   Updated: 2022/12/28 11:38:02 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ void	cut_map(char	**file, t_info	*info)
 			return ;
 		}
 	}
-	info->map[j] = NULL;
+	info->map[++j] = NULL;
 	ft_free_split(file);
 }
