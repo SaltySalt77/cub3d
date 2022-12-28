@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 13:17:09 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/27 17:18:01 by nhwang           ###   ########.fr       */
+/*   Updated: 2022/12/28 11:20:52 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ void	init_game(t_data *m_data, t_textures *textures)
 		i++;
 	}
 	//ㄴㅏ중에 map val >> 이중 str free
-	//0 1 ,w s ,,, space는 ok .. 긴 가로 길이 저장
-	//padding
 }
 
 int	main(int argc, char	**argv)
@@ -53,8 +51,8 @@ int	main(int argc, char	**argv)
 	init_game(&m_data, &textures);
 	if (!validate_map(&info, &textures, argv[1]))
 		return (1);
-	printf("=========\n");
-	padding_map(info.map, &info);
+	printf("=========\n"); //
+	padding_map(&info);
 	for (int i = 0; info.map[i]; i++)
 		printf("%s | \n",info.map[i]);
 	return (0);
