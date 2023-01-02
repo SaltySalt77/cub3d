@@ -41,7 +41,13 @@ int	count_map(char **map, t_info *info)
 		while (map[i][j])
 		{
 			if (check_c(map[i][j], chk_dir) == 1)
+			{
 				save_chara_dir(map[i][j], info, &chk_dir);
+				info->pos_x=j;//
+				info->pos_x+=0.5;
+				info->pos_y=i;//
+				info->pos_y+=0.5;
+			}
 			else if (!check_c(map[i][j], chk_dir))
 				return (0);
 			j++;

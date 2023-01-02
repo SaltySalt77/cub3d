@@ -5,6 +5,7 @@
 # include "get_next_line.h"
 # include <fcntl.h>
 # include <stdio.h>
+# include <math.h>
 # include "mlx.h"
 
 typedef enum e_idf {
@@ -16,6 +17,10 @@ typedef enum e_idf {
 	CEILING = 5
 }	t_idf;
 
+# define SCREEN_HEIGHT 480
+# define SCREEN_WIDTH 640
+# define TEX_WIDTH 32
+
 typedef struct s_textures {
 	char	*filename[4];
 	int		floor[3];
@@ -26,8 +31,10 @@ typedef struct s_info {
 	char	**map;
 	int		max_wid;
 	int		max_hei;
-	int		pos_x;
-	int		pos_y;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
 	int		dir;
 }	t_info;
 
