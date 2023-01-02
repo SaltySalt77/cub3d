@@ -11,6 +11,7 @@
 - [x] map parsing
 <details>
 <summary>더보기</summary>
+
 	- [x] 파일 .cub로 끝나는 지 확인
 	- [x] 파일 열고 open 예외처리
 	- [x] 파일 다 읽어오기
@@ -37,6 +38,7 @@
 - [ ] ray casting
 <details>
 <summary>더보기</summary>
+
 	- [x] texture.xpm 파일 추가
 	- [ ] 이미지 규격 찾기
 	- [ ] key hook
@@ -44,6 +46,7 @@
 		- [x] mlx init
 		- [ ] new window
 		- [ ] mlx put img
+
 </details>
 
 
