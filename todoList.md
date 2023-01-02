@@ -36,19 +36,24 @@
 </details>
 
 <details>
-<summary>ray casting</summary>
+<summary>render</summary>
 
-- [ ] ray casting
+- [ ] mlx
+	- [x] mlx init
+	- [x] new window
 	- [x] texture.xpm 파일 추가
-	- [ ] 이미지 규격 찾기
-	- [ ] key hook
-	- [ ] mlx
-		- [x] mlx init
-		- [ ] new window
-		- [ ] mlx put img
+	- [ ] mlx put img
+		- destroy 하고, 새로 init 해주고
+- [ ] ray casting
+	- [ ] 처음 방향 설정 
+	- [ ] 방향 바뀌는 거
+		- [ ] 회전 행렬 방식... 공식.. 갖다 쓰기
+	- [x] 화면 프린트
 
 </details>
 
+- [ ] key hook
+	- [ ] 플레이어 이동
 
 ### 1229 목표
 
