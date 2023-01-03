@@ -22,6 +22,7 @@ typedef enum e_idf {
 # define TEX_WIDTH 32
 
 # define X_EVENT_KEY_PRESS	2
+# define X_EVENT_KEY_RELEASE	3
 # define X_EVENT_KEY_EXIT	17
 # define KEY_ESC			53
 # define KEY_W				13
@@ -77,9 +78,11 @@ typedef struct s_img
 }	t_img;
 
 typedef struct s_data {
-	void	*mlx;
-	void	*win;
-	t_img	imgs[4];
+	void		*mlx;
+	void		*win;
+	t_img		imgs[4];
+	t_textures	textures;
+	t_info		*info;
 }	t_data;
 
 void	cut_map(char	**file, t_info	*info);
