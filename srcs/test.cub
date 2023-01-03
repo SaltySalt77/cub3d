@@ -1,6 +1,6 @@
 NO ./imgs/north_texture.xpm
 SO ./imgs/south_texture.xpm
-F 00,153,1
+F 0,0,255
 WE ./imgs/west_texture.xpm
 EA ./imgs/east_texture.xpm
 

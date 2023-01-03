@@ -61,7 +61,41 @@ int	main(int argc, char	**argv)
 
 	t_img buffer; // y-coordinate first because it works per scanline//<<<int*
 	buffer.image = mlx_new_image(m_data.mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+	int pp;
+	int xx;
+	pp = 0;
+	int _ceil = 0;
+	int _floor = 0;
+
 	int *buf_address = (int *)mlx_get_data_addr(buffer.image ,&(buffer.bpp),&(buffer.size_l),&(buffer.endian));
+	for (int yy = 0; yy < 3; yy++)
+	{
+		_ceil = _ceil * 256 + textures.ceiling[yy];
+	}
+	while(pp < SCREEN_HEIGHT/2)
+	{
+		xx = 0;
+		while(xx < SCREEN_WIDTH)
+		{
+			buf_address[(buffer.size_l)/4 * pp + xx] = _ceil;
+			xx++;
+		}
+		pp++;
+	}
+	for (int yy = 0; yy < 3; yy++)//
+	{
+		_floor = _floor * 256 + textures.floor[yy];
+	}
+	while(pp < SCREEN_HEIGHT)
+	{
+		xx = 0;
+		while(xx < SCREEN_WIDTH)
+		{
+			buf_address[(buffer.size_l)/4 * pp + xx] = _floor;
+			xx++;
+		}
+		pp++;
+	}
 	int w = SCREEN_WIDTH;
 	printf("first dir : %lf\n",info.dir_x);
 	printf("first dir : %lf\n",info.dir_y);
