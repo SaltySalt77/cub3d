@@ -21,11 +21,36 @@ typedef enum e_idf {
 # define SCREEN_WIDTH 640
 # define TEX_WIDTH 32
 
+# define X_EVENT_KEY_PRESS	2
+# define X_EVENT_KEY_EXIT	17
+# define KEY_ESC			53
+# define KEY_W				13
+# define KEY_A				0
+# define KEY_S				1
+# define KEY_D				2
+# define KEY_L				123
+# define KEY_R				124
+
+# define ROT_SPEED			0.03
+# define MOVE_SPEED			0.05
+
+
+
+
 typedef struct s_textures {
 	char	*filename[4];
 	int		floor[3];
 	int		ceiling[3];
 }	t_textures;
+
+typedef struct s_move{
+	int	w;
+	int	a;
+	int	s;
+	int	d;
+	int	l;
+	int	r;
+}	t_move;
 
 typedef struct s_info {
 	char	**map;
@@ -36,6 +61,7 @@ typedef struct s_info {
 	double	dir_x;
 	double	dir_y;
 	int		dir;
+	t_move	move;
 }	t_info;
 
 typedef struct s_img

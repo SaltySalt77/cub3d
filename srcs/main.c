@@ -31,6 +31,78 @@ void	init_game(t_data *m_data, t_textures *textures)
 		i++;
 	}
 }
+int	release_key(int key_code, t_info *info)
+{
+	if (key_code == KEY_ESC)
+		exit_game(info);
+	if (key_code == KEY_W)
+		info->move.w = 0;
+	if (key_code == KEY_A)
+		info->move.a = 0;
+	if (key_code == KEY_S)
+		info->move.s = 0;
+	if (key_code == KEY_D)
+		info->move.d = 0;
+	if (key_code == KEY_L)
+		info->move.l = 0;
+	if (key_code == KEY_R)
+		info->move.r = 0;
+	return (0);
+}
+
+int	press_key(int key_code, t_info *info)
+{
+	if (key_code == KEY_ESC)
+		exit_game(info);
+	if (key_code == KEY_W)
+		info->move.w = 1;
+	if (key_code == KEY_A)
+		info->move.a = 1;
+	if (key_code == KEY_S)
+		info->move.s = 1;
+	if (key_code == KEY_D)
+		info->move.d = 1;
+	if (key_code == KEY_L)
+		info->move.l = 1;
+	if (key_code == KEY_R)
+		info->move.r = 1;
+	return (0);
+}
+
+void	key_hook_w(t_info *info)
+{
+	double	posX;
+	double	posY;
+	double	dirX;
+	double	dirY;
+
+	dirX = info->dir_x;
+	dirY = info->dir_y;
+	posX = info->pos_x;
+	posY = info->pos_y;
+
+	if(info->map[(int)(posX + dirX * MOVE_SPEED)][(int)posY] == '0')
+		posX += dirX * MOVE_SPEED;
+    if(info->map[(int)posX][(int)(posY + dirY * MOVE_SPEED)] == '0')
+		posY += dirY * MOVE_SPEED;
+}
+
+int	key_hook(t_info *info)
+{
+	if (info->move.w && !info->move.s)
+		key_hook_w(info);
+	if (info->move.s && !info->move.w)
+		key_hook_s(info);
+	if (info->move.a && !info->move.d)
+		key_hook_a(info);
+	if (info->move.d && !info->move.a)
+		key_hook_d(info);
+	if (info->move.l && !info->move.r)
+		key_hook_l(info);
+	if (info->move.r && !info->move.l)
+		key_hook_r(info);
+	return (1);
+}
 
 int	main(int argc, char	**argv)
 {
@@ -61,6 +133,9 @@ int	main(int argc, char	**argv)
 
 	t_img buffer; // y-coordinate first because it works per scanline//<<<int*
 	buffer.image = mlx_new_image(m_data.mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+	mlx_hook(m_data.win, X_EVENT_KEY_PRESS, 0, &press_key, &info);
+
 	int pp;
 	int xx;
 	pp = 0;
@@ -102,6 +177,7 @@ int	main(int argc, char	**argv)
 
 	while(1)
   	{
+		///
 		for(int x = 0; x < w; x++)
 		{
 			double cameraX = (2*x/(double)w)-1; //x-coordinate in camera space
@@ -144,6 +220,7 @@ int	main(int argc, char	**argv)
 				stepY = 1;
 				sideDistY = (mapY + 1.0 - info.pos_y) * deltaDistY;
 			}
+
 			while (hit == 0)
 			{
 				if (sideDistX < sideDistY)// <
@@ -163,6 +240,8 @@ int	main(int argc, char	**argv)
 					hit = 1;
 				}
 			}
+
+
 			if (side == 0) perpWallDist = (mapX - info.pos_x + (1 - stepX) / 2) / rayDirX;
 			else           perpWallDist = (mapY - info.pos_y + (1 - stepY) / 2) / rayDirY;
 
@@ -190,7 +269,6 @@ int	main(int argc, char	**argv)
 				text_num = NORTH;
 			else
 				text_num = SOUTH;
-			// 조건문 texture 선택, 벽의 방향 기준
 			if(rayDirX < 0 && side == 0) texX = TEX_WIDTH - texX - 1;//0 // west texture
 			if(rayDirY > 0 && side == 1) texX = TEX_WIDTH - texX - 1;//1 // south texture
 			double step = 1.0 * TEX_WIDTH / lineHeight;
@@ -203,11 +281,8 @@ int	main(int argc, char	**argv)
 				texPos += step;
 				data = (unsigned int *)mlx_get_data_addr(m_data.imgs[text_num].image ,&(m_data.imgs[text_num].bpp),&(m_data.imgs[text_num].size_l),&(m_data.imgs[text_num].endian));
 				color = data[(m_data.imgs[text_num].size_l)/4 * texY + texX];//texNum == 0으로 준  상상태
-				printf("%d, %d\n",texY,texX);
 				if(side == 1) color = (color >> 1) & 8355711;
 				buf_address[(buffer.size_l)/4 * y + x] = color;
-				printf("%d, %d\n",y,x);
-				printf("\n");
 			}
 		}
 		mlx_put_image_to_window(m_data.mlx, m_data.win, buffer.image, 0, 0);
