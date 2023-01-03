@@ -128,7 +128,6 @@ int	main(int argc, char	**argv)
 	// double dirX = 0.0, dirY = -1.0; //initial direction vector
 	info.dir_x = 0.0;
 	info.dir_y = -1.0;
-	double planeX = 0.66, planeY = 0.0; //the 2d raycaster version of camera plane
 	m_data.win = mlx_new_window(m_data.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
 
 	t_img buffer; // y-coordinate first because it works per scanline//<<<int*
@@ -181,8 +180,8 @@ int	main(int argc, char	**argv)
 		for(int x = 0; x < w; x++)
 		{
 			double cameraX = (2*x/(double)w)-1; //x-coordinate in camera space
-			double rayDirX = info.dir_x + planeX*cameraX;
-			double rayDirY = info.dir_y + planeY*cameraX;
+			double rayDirX = info.dir_x + PLANE_X*cameraX; //planeX
+			double rayDirY = info.dir_y + PLANE_Y*cameraX; //planeY
 
 			int mapX = (int)info.pos_x;
 			int mapY = (int)info.pos_y;
