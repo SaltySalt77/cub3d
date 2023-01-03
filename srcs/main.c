@@ -230,39 +230,18 @@ int	press_key(int key_code, t_info *info)
 
 void	key_hook_w(t_info *info)
 {
-	double	temp_x;
-	double	temp_y;
-
-	temp_x = info->pos_x;
-	temp_y = info->pos_y;
-	if ((info->pos_x + info->dir_x * MOVE_SPEED) < 1.05 || (info->pos_y + info->dir_y * MOVE_SPEED) < 1.05)
-	{
-		printf("test\n");
-		printf("y : %f",info->pos_y);
-		printf("x : %f",info->pos_x);
-
-		return ;
-	}
-	if(info->map[(int)floor(info->pos_y)][(int)floor(info->pos_x + info->dir_x * MOVE_SPEED)] == '0')
-	{
-		info->pos_x += info->dir_x * MOVE_SPEED;
-		printf("%c\n", info->map[(int)info->pos_y][(int)info->pos_x]);
-	}
-	// if ((int)(info->pos_y + info->dir_y * MOVE_SPEED) > 0)
-	// {
-	if(info->map[(int)(info->pos_y + info->dir_y * MOVE_SPEED)][(int)info->pos_x] == '0')
-	{
+	if (info->map[(int)floor(info->pos_y + info->dir_y * MOVE_SPEED)][(int)(info->pos_x)] == '0') // 방향 전환 없이 w진행
 		info->pos_y += info->dir_y * MOVE_SPEED;
-		printf("yy : %c\n", info->map[(int)info->pos_y][(int)info->pos_x]);
-	}
+	if (info->map[(int)floor(info->pos_y)][(int)floor(info->pos_x + info->dir_x * MOVE_SPEED)] == '0')
+		info->pos_x += info->dir_x * MOVE_SPEED;
 }
 
 void	key_hook_s(t_info	*info)
 {
-	if(info->map[(int)info->pos_y][(int)(info->pos_x - info->dir_x * MOVE_SPEED)] == '0')
-		info->pos_x += info->dir_x * MOVE_SPEED;
     if(info->map[(int)(info->pos_y - info->dir_y * MOVE_SPEED)][(int)info->pos_x] == '0')
-		info->pos_y += info->dir_y * MOVE_SPEED;
+		info->pos_y -= info->dir_y * MOVE_SPEED;
+	if(info->map[(int)info->pos_y][(int)(info->pos_x - info->dir_x * MOVE_SPEED)] == '0')
+		info->pos_x -= info->dir_x * MOVE_SPEED;
 }
 
 int	key_hook(t_info *info)
