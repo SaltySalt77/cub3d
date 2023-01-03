@@ -64,8 +64,8 @@ int	ray_casting(void	*value)
 	for(int x = 0; x < w; x++)
 	{
 		double cameraX = (2*x/(double)w)-1; //x-coordinate in camera space
-		double rayDirX = info->dir_x + PLANE_X*cameraX; //planeX
-		double rayDirY = info->dir_y + PLANE_Y*cameraX; //planeY
+		double rayDirX = info->dir_x + info->plane_x*cameraX; //planeX
+		double rayDirY = info->dir_y + info->plane_y*cameraX; //planeY
 
 		int mapX = (int)info->pos_x;
 		int mapY = (int)info->pos_y;
@@ -244,6 +244,77 @@ void	key_hook_s(t_info	*info)
 		info->pos_x -= info->dir_x * MOVE_SPEED;
 }
 
+void	key_hook_l(t_info	*info)
+{
+	double	old_dir;
+	double	old_plane;
+
+	old_dir = info->dir_y;
+	old_plane = info->plane_y;
+	info->dir_y = info->dir_x * sin(-ROT_SPEED) + info->dir_y * cos(-ROT_SPEED);
+	info->dir_x = info->dir_x * cos(-ROT_SPEED) - old_dir * sin(-ROT_SPEED);
+	info->plane_y = info->plane_x * sin(-ROT_SPEED)
+		+ info->plane_y * cos(-ROT_SPEED);
+	info->plane_x = info->plane_x * cos(-ROT_SPEED)
+		- old_plane * sin(-ROT_SPEED);
+}
+
+void	key_hook_r(t_info	*info)
+{
+	double	old_dir;
+	double	old_plane;
+
+	old_dir = info->dir_y;
+	old_plane = info->plane_y;
+	info->dir_y = info->dir_x * sin(ROT_SPEED) + info->dir_y * cos(ROT_SPEED);
+	info->dir_x = info->dir_x * cos(ROT_SPEED) - old_dir * sin(ROT_SPEED);
+	info->plane_y = info->plane_x * sin(ROT_SPEED)
+		+ info->plane_y * cos(ROT_SPEED);
+	info->plane_x = info->plane_x * cos(ROT_SPEED)
+		- old_plane * sin(ROT_SPEED);
+}
+
+void	key_hook_d(t_info	*info)
+{
+	double	tmp_dirX;
+	double	tmp_dirY;
+
+	if (info->dir_y < 0)
+	{
+		tmp_dirX = info->dir_x + 1;
+		if (tmp_dirX > 1)
+			tmp_dirX = 2 - tmp_dirX;
+	}
+	else
+	{
+		tmp_dirX = info->dir_x - 1;
+		if (tmp_dirX < -1)
+			tmp_dirX = 1 + tmp_dirX;
+	}
+	if (info->dir_x < 0)
+	{
+		tmp_dirY = info->dir_y - 1;
+		if (tmp_dirY < -1)
+			tmp_dirY = 1 + tmp_dirY;
+	}
+	else
+	{
+		tmp_dirY = info->dir_y + 1;
+		if (tmp_dirY > 1)
+			tmp_dirY = 2 - tmp_dirY;
+	}
+	// tmp_dirY = info->dir_x * sin(90) + info->dir_y * cos(90);
+	// tmp_dirX = info->dir_x * cos(90) - info->dir_y * sin(90);
+	printf("%lf %lf \n", info->dir_x, info->dir_y);
+	printf("%lf %lf \n", tmp_dirX, tmp_dirY);
+	if (info->map[(int)(info->pos_y + tmp_dirY * MOVE_SPEED * 2)][(int)(info->pos_x)] == '0')
+		info->pos_y += tmp_dirY * MOVE_SPEED;
+	if (info->map[(int)(info->pos_y)][(int)(info->pos_x + tmp_dirX * MOVE_SPEED * 2)] == '0')
+		info->pos_x += tmp_dirX * MOVE_SPEED;
+
+	// printf("%lf %lf \n", info->pos_x, info->pos_y);
+}
+
 int	key_hook(t_info *info)
 {
 	if (info->move.w && !info->move.s)
@@ -252,12 +323,12 @@ int	key_hook(t_info *info)
 		key_hook_s(info);
 // 	if (info->move.a && !info->move.d)
 // 		key_hook_a(info);
-// 	if (info->move.d && !info->move.a)
-// 		key_hook_d(info);
-// 	if (info->move.l && !info->move.r)
-// 		key_hook_l(info);
-// 	if (info->move.r && !info->move.l)
-// 		key_hook_r(info);
+	if (info->move.d && !info->move.a)
+		key_hook_d(info);
+	if (info->move.l && !info->move.r)
+		key_hook_l(info);
+	if (info->move.r && !info->move.l)
+		key_hook_r(info);
 	return (1);
 }
 
@@ -298,6 +369,8 @@ int	main(int argc, char	**argv)
 	// double dirX = 0.0, dirY = -1.0; //initial direction vector
 	info.dir_x = 0.0;
 	info.dir_y = -1.0;
+	info.plane_x = 0.66;
+	info.plane_y = 0;
 	info.map[(int)info.pos_y][(int)info.pos_x] = '0';
 	m_data.win = mlx_new_window(m_data.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
 	mlx_hook(m_data.win, X_EVENT_KEY_PRESS, 0, &press_key, &info);

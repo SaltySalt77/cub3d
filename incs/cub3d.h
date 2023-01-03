@@ -63,6 +63,8 @@ typedef struct s_info {
 	double	pos_y;
 	double	dir_x;
 	double	dir_y;
+	double	plane_x;
+	double	plane_y;
 	int		dir;
 	t_move	move;
 }	t_info;
