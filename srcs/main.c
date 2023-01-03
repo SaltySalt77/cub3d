@@ -230,17 +230,17 @@ int	press_key(int key_code, t_info *info)
 
 void	key_hook_w(t_info *info)
 {
-	if (info->map[(int)floor(info->pos_y + info->dir_y * MOVE_SPEED)][(int)(info->pos_x)] == '0') // 방향 전환 없이 w진행
+	if (info->map[(int)(info->pos_y + info->dir_y * MOVE_SPEED * 2)][(int)(info->pos_x)] == '0') // 방향 전환 없이 w진행
 		info->pos_y += info->dir_y * MOVE_SPEED;
-	if (info->map[(int)floor(info->pos_y)][(int)floor(info->pos_x + info->dir_x * MOVE_SPEED)] == '0')
+	if (info->map[(int)(info->pos_y)][(int)(info->pos_x + info->dir_x * MOVE_SPEED * 2)] == '0')
 		info->pos_x += info->dir_x * MOVE_SPEED;
 }
 
 void	key_hook_s(t_info	*info)
 {
-    if(info->map[(int)(info->pos_y - info->dir_y * MOVE_SPEED)][(int)info->pos_x] == '0')
+    if(info->map[(int)(info->pos_y - info->dir_y * MOVE_SPEED * 2)][(int)info->pos_x] == '0')
 		info->pos_y -= info->dir_y * MOVE_SPEED;
-	if(info->map[(int)info->pos_y][(int)(info->pos_x - info->dir_x * MOVE_SPEED)] == '0')
+	if(info->map[(int)info->pos_y][(int)(info->pos_x - info->dir_x * MOVE_SPEED * 2)] == '0')
 		info->pos_x -= info->dir_x * MOVE_SPEED;
 }
 
