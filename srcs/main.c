@@ -162,8 +162,8 @@ int	ray_casting(void	*value)
 			int texY = (int)texPos & (TEX_WIDTH - 1);
 			texPos += step;
 			data = (unsigned int *)mlx_get_data_addr(m_data->imgs[text_num].image ,&(m_data->imgs[text_num].bpp),&(m_data->imgs[text_num].size_l),&(m_data->imgs[text_num].endian));
-			color = data[(m_data->imgs[text_num].size_l)/4 * texY + texX];//texNum == 0으로 준  상상태
-			if(side == 1) color = (color >> 1) & 8355711;
+			color = data[(m_data->imgs[text_num].size_l)/4 * texY + texX];
+			// if(side == 1) color = (color >> 1) & 8355711;
 			buf_address[(buffer.size_l)/4 * y + x] = color;
 		}
 	}
@@ -209,10 +209,20 @@ int	release_key(int key_code, t_info *info)
 	return (0);
 }
 
-int	press_key(int key_code, t_info *info)
+int	exit_game(t_data *m_data)
 {
-	// if (key_code == KEY_ESC)
-	// 	exit_game(info);
+	mlx_destroy_window(m_data->mlx, m_data->win);
+	system("leaks cub3D | grep leak");
+	exit(0);
+}
+
+int	press_key(int key_code, t_data *m_data)
+{
+	t_info	*info;
+
+	info = m_data->info;
+	if (key_code == KEY_ESC)
+		exit_game(m_data);
 	if (key_code == KEY_W)
 		info->move.w = 1;
 	if (key_code == KEY_A)
@@ -313,6 +323,38 @@ int	main_loop(t_data	*m_data)
 	return (0);
 }
 
+void	init_info(t_info *info)
+{
+	if (info->dir == NORTH)
+	{
+		info->dir_x = 0.0;
+		info->dir_y = -1.0;
+		info->plane_x = 0.66;
+		info->plane_y = 0;
+	}
+	else if (info->dir == SOUTH)
+	{
+		info->dir_x = 0.0;
+		info->dir_y = 1.0;
+		info->plane_x = -0.66;
+		info->plane_y = 0;
+	}
+	else if (info->dir == WEST)
+	{
+		info->dir_x = -1.0;
+		info->dir_y = 0.0;
+		info->plane_x = 0;
+		info->plane_y = -0.66;
+	}
+	else
+	{
+		info->dir_x = 1.0;
+		info->dir_y = 0.0;
+		info->plane_x = 0;
+		info->plane_y = 0.66;
+	}
+}
+
 int	main(int argc, char	**argv)
 {
 	t_info		info;
@@ -341,15 +383,14 @@ int	main(int argc, char	**argv)
 	m_data.info = &info;
 	////////////////////////////////////////////////
 	// double dirX = 0.0, dirY = -1.0; //initial direction vector
-	info.dir_x = 0.0;
-	info.dir_y = -1.0;
-	info.plane_x = 0.66;
-	info.plane_y = 0;
 	info.map[(int)info.pos_y][(int)info.pos_x] = '0';
+	init_info(&info);
 	m_data.win = mlx_new_window(m_data.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
-	mlx_hook(m_data.win, X_EVENT_KEY_PRESS, 0, &press_key, &info);
+	mlx_hook(m_data.win, X_EVENT_KEY_PRESS, 0, &press_key, &m_data);
 	mlx_hook(m_data.win, X_EVENT_KEY_RELEASE, 0, &release_key, &info);
+	mlx_hook(m_data.win, X_EVENT_KEY_EXIT, 0, &exit_game, &m_data);
 	mlx_loop_hook(m_data.mlx, &main_loop, (void *)&m_data);
 	mlx_loop(m_data.mlx);
 	return (0);
+
 }

@@ -1,6 +1,7 @@
 NO ./imgs/north_texture.xpm
 SO ./imgs/south_texture.xpm
-F 0,128,128
+F 0,128,    128
+
 WE ./imgs/west_texture.xpm
 EA ./imgs/east_texture.xpm
 
@@ -14,6 +15,6 @@ C 255,255,0
 1000001
 100N001
 1000001
-1000001
+1001001
 1000001
 1111111
