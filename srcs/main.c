@@ -274,45 +274,19 @@ void	key_hook_r(t_info	*info)
 		- old_plane * sin(ROT_SPEED);
 }
 
+void	key_hook_a(t_info	*info)
+{
+    if(info->map[(int)(info->pos_y - info->plane_y * MOVE_SPEED * 2)][(int)info->pos_x] == '0')
+		info->pos_y -= info->plane_y * MOVE_SPEED;
+	if(info->map[(int)info->pos_y][(int)(info->pos_x - info->plane_x * MOVE_SPEED * 2)] == '0')
+		info->pos_x -= info->plane_x * MOVE_SPEED;
+}
 void	key_hook_d(t_info	*info)
 {
-	double	tmp_dirX;
-	double	tmp_dirY;
-
-	if (info->dir_y < 0)
-	{
-		tmp_dirX = info->dir_x + 1;
-		if (tmp_dirX > 1)
-			tmp_dirX = 2 - tmp_dirX;
-	}
-	else
-	{
-		tmp_dirX = info->dir_x - 1;
-		if (tmp_dirX < -1)
-			tmp_dirX = 1 + tmp_dirX;
-	}
-	if (info->dir_x < 0)
-	{
-		tmp_dirY = info->dir_y - 1;
-		if (tmp_dirY < -1)
-			tmp_dirY = 1 + tmp_dirY;
-	}
-	else
-	{
-		tmp_dirY = info->dir_y + 1;
-		if (tmp_dirY > 1)
-			tmp_dirY = 2 - tmp_dirY;
-	}
-	// tmp_dirY = info->dir_x * sin(90) + info->dir_y * cos(90);
-	// tmp_dirX = info->dir_x * cos(90) - info->dir_y * sin(90);
-	printf("%lf %lf \n", info->dir_x, info->dir_y);
-	printf("%lf %lf \n", tmp_dirX, tmp_dirY);
-	if (info->map[(int)(info->pos_y + tmp_dirY * MOVE_SPEED * 2)][(int)(info->pos_x)] == '0')
-		info->pos_y += tmp_dirY * MOVE_SPEED;
-	if (info->map[(int)(info->pos_y)][(int)(info->pos_x + tmp_dirX * MOVE_SPEED * 2)] == '0')
-		info->pos_x += tmp_dirX * MOVE_SPEED;
-
-	// printf("%lf %lf \n", info->pos_x, info->pos_y);
+	if (info->map[(int)(info->pos_y + info->plane_y * MOVE_SPEED * 2)][(int)(info->pos_x)] == '0')
+		info->pos_y += info->plane_y * MOVE_SPEED;
+	if (info->map[(int)(info->pos_y)][(int)(info->pos_x + info->plane_x * MOVE_SPEED * 2)] == '0')
+		info->pos_x += info->plane_x * MOVE_SPEED;
 }
 
 int	key_hook(t_info *info)
@@ -321,8 +295,8 @@ int	key_hook(t_info *info)
 		key_hook_w(info);
 	if (info->move.s && !info->move.w)
 		key_hook_s(info);
-// 	if (info->move.a && !info->move.d)
-// 		key_hook_a(info);
+	if (info->move.a && !info->move.d)
+		key_hook_a(info);
 	if (info->move.d && !info->move.a)
 		key_hook_d(info);
 	if (info->move.l && !info->move.r)
