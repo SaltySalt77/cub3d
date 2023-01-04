@@ -93,4 +93,21 @@ void	assort_textures(char **file, t_textures	*textures, char	*std[6]);
 int		save_rgb(int	*rgb, char	**line);
 int		validate_newline(char	*filename, t_info	*info);
 
+int		key_hook(t_info *info);
+void	key_hook_a(t_info	*info);
+void	key_hook_d(t_info	*info);
+void	key_hook_w(t_info *info);
+void	key_hook_s(t_info	*info);
+
+void	key_hook_r(t_info	*info);
+void	key_hook_l(t_info	*info);
+
+int		press_key(int key_code, t_data *m_data);
+int		release_key(int key_code, t_info *info);
+
+int		exit_game(t_data *m_data);
+void	init_game(t_data *m_data, t_textures *textures);
+
+int		ray_casting(void	*value);
+
 #endif

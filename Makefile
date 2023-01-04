@@ -6,7 +6,7 @@
 #    By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/18 15:40:24 by hyna              #+#    #+#              #
-#    Updated: 2023/01/04 16:28:57 by nhwang           ###   ########.fr        #
+#    Updated: 2023/01/04 17:09:57 by nhwang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,12 @@ INC_LINK = -I./incs
 LIBS = -L./libs/libft -lft\
 		-L./libs/mlx -lmlx\
 
-SRCS_DIRS = map_parsing
+SRCS_DIRS = map_parsing	\
+			key_hook	\
+			ray_casting	\
 
 SRCS_NAME = main.c \
+			mlx_game.c	\
 			map_parsing/read_map.c	\
 			map_parsing/ft_split2.c	\
 			map_parsing/cut_map.c	\
@@ -29,6 +32,10 @@ SRCS_NAME = main.c \
 			map_parsing/check_vec.c	\
 			map_parsing/save_texture.c	\
 			map_parsing/validate_map2.c	\
+			key_hook/key_dir.c	\
+			key_hook/key_rotate.c	\
+			key_hook/key_p_r.c	\
+			ray_casting/ray_cast.c	\
 
 SRCS_PATH = ./srcs
 SRCS = $(addprefix $(SRCS_PATH)/, $(SRCS_NAME))
