@@ -44,9 +44,10 @@
 	- [x] texture.xpm 파일 추가
 	- [x] mlx put img
 		- destroy 하고, 새로 init 해주고
+	- [ ] esc, x button hooking
 - [ ] ray casting
 	- [ ] wall
-		- [ ] 처음 방향 설정
+		- [x] 처음 방향 설정
 		- [x] hit 지점 찾기
 		- [x] 이미지 버퍼에 텍스처 담기
 		- [x] 화면 프린트
@@ -54,6 +55,7 @@
 			- [x] 회전 행렬 공식 갖다 쓰기
 	- [x] floor & ceiling
 		- [x] 바닥과 천장 칠하기
+	- [ ] color 지우기
 
 </details>
 
@@ -62,6 +64,7 @@
 
 - [ ] norminette
 - [ ] 함수 자르기 및 이름 수정
+- [ ] validate tester기 다시 돌리기
 ### 1229 목표
 
 - [x]  ray casting 방식
