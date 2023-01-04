@@ -42,25 +42,27 @@
 	- [x] mlx init
 	- [x] new window
 	- [x] texture.xpm 파일 추가
-	- [ ] mlx put img
+	- [x] mlx put img
 		- destroy 하고, 새로 init 해주고
 - [ ] ray casting
 	- [ ] wall
-		- [ ] 처음 방향 설정 
+		- [ ] 처음 방향 설정
 		- [x] hit 지점 찾기
 		- [x] 이미지 버퍼에 텍스처 담기
 		- [x] 화면 프린트
-		- [ ] 방향 바뀌는 거
-			- [ ] 회전 행렬 공식 갖다 쓰기
-	- [ ] floor & ceiling
-		- [ ] 바닥과 천장 칠하기 
+		- [x] 방향 바뀌는 거
+			- [x] 회전 행렬 공식 갖다 쓰기
+	- [x] floor & ceiling
+		- [x] 바닥과 천장 칠하기
 
 </details>
 
-- [ ] key hook
-	- [ ] 플레이어 이동
+- [x] key hook
+	- [x] 플레이어 이동
 
+- [ ] norminette
+- [ ] 함수 자르기 및 이름 수정
 ### 1229 목표
 
-- [x]  ray casting 방식 
+- [x]  ray casting 방식
 	- [x] 최소한의 이해
