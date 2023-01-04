@@ -90,7 +90,7 @@ void	assort_textures(char **file, t_textures	*textures, char	*std[6])
 	while (file[++i] && cnt < 6 && cnt == i)
 	{
 		line = ft_split2(file[i], " ,");
-		if (!line || !ft_checkline(line))
+		if (!line || count_strs(line) < 2 || !ft_checkline(line))
 		{
 			ft_free_split(file);
 			perror_exit("Invalid identifier");

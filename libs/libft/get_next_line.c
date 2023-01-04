@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyna <hyna@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 18:17:22 by hyna              #+#    #+#             */
-/*   Updated: 2022/05/14 18:17:29 by hyna             ###   ########.fr       */
+/*   Updated: 2023/01/04 16:05:55 by nhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,8 @@ char	*get_next_line(int fd)
 	tmp = read_files(fd, backup[fd]);
 	if (!tmp)
 		return (NULL);
-	else if (!tmp[0])
-		return (free_str(tmp));
+	// else if (!tmp[0])
+	// 	return (free_str(tmp));
 	result = make_result(tmp);
 	if (!result)
 		return (free_str(backup[fd]));

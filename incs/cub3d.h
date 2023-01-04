@@ -35,11 +35,6 @@ typedef enum e_idf {
 # define ROT_SPEED			0.03
 # define MOVE_SPEED			0.05
 
-# define PLANE_X			0.66 //
-# define PLANE_Y			0 ///
-
-
-
 typedef struct s_textures {
 	char	*filename[4];
 	int		floor[3];

@@ -20,9 +20,9 @@ void	save_chara_dir(char dir, t_info	*info, int	*chk_dir)
 	else if (dir == 'S')
 		info->dir = 1;
 	else if (dir == 'E')
-		info->dir = 2;
-	else if (dir == 'W')
 		info->dir = 3;
+	else if (dir == 'W')
+		info->dir = 2;
 	*chk_dir = 1;
 }
 

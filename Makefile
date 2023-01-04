@@ -6,13 +6,13 @@
 #    By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/18 15:40:24 by hyna              #+#    #+#              #
-#    Updated: 2023/01/02 15:03:56 by nhwang           ###   ########.fr        #
+#    Updated: 2023/01/04 16:28:57 by nhwang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 CC = cc
-CCFLAGS = -g3 -fsanitize=address#-Wall -Werror -Wextra
+CCFLAGS = -Wall -Werror -Wextra
 CCFWRK = -framework OpenGL -framework AppKit
 INC_LINK = -I./incs
 LIBS = -L./libs/libft -lft\
