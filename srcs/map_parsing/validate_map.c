@@ -13,8 +13,13 @@ int	check_c(char c, int chk_dir)
 	return (0);
 }
 
-void	save_chara_dir(char dir, t_info	*info, int	*chk_dir)
+void	save_chara_dir(t_info	*info, int	*chk_dir, int i, int j)
 {
+	char	dir;
+
+	info->pos_x = j + 0.5;
+	info->pos_y = i + 0.5;
+	dir = info->map[i][j];
 	if (dir == 'N')
 		info->dir = 0;
 	else if (dir == 'S')
@@ -41,13 +46,7 @@ int	count_map(char **map, t_info *info)
 		while (map[i][j])
 		{
 			if (check_c(map[i][j], chk_dir) == 1)
-			{
-				save_chara_dir(map[i][j], info, &chk_dir);
-				info->pos_x=j;//
-				info->pos_x+=0.5;
-				info->pos_y=i;//
-				info->pos_y+=0.5;
-			}
+				save_chara_dir(info, &chk_dir, i, j);
 			else if (!check_c(map[i][j], chk_dir))
 				return (0);
 			j++;
