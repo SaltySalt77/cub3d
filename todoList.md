@@ -38,15 +38,15 @@
 <details>
 <summary>render</summary>
 
-- [ ] mlx
+- [x] mlx
 	- [x] mlx init
 	- [x] new window
 	- [x] texture.xpm 파일 추가
 	- [x] mlx put img
 		- destroy 하고, 새로 init 해주고
-	- [ ] esc, x button hooking
-- [ ] ray casting
-	- [ ] wall
+	- [x] esc, x button hooking
+- [x] ray casting
+	- [x] wall
 		- [x] 처음 방향 설정
 		- [x] hit 지점 찾기
 		- [x] 이미지 버퍼에 텍스처 담기
@@ -55,16 +55,19 @@
 			- [x] 회전 행렬 공식 갖다 쓰기
 	- [x] floor & ceiling
 		- [x] 바닥과 천장 칠하기
-	- [ ] color 지우기
+	- [x] color 지우기
+		- 더 어둡게 바꿔주던 것
 
 </details>
 
 - [x] key hook
 	- [x] 플레이어 이동
 
-- [ ] norminette
-- [ ] 함수 자르기 및 이름 수정
+- [x] norminette
+- [x] 함수 자르기 및 이름 수정
 - [ ] validate tester기 다시 돌리기
+- [ ] flag 추가해서 다시 돌려보기
+
 ### 1229 목표
 
 - [x]  ray casting 방식
