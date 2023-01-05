@@ -62,6 +62,14 @@ typedef struct s_info {
 	double	plane_y;
 	int		dir;
 	t_move	move;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	int		step_x;
+	int		step_y;
+	int		map_x;
+	int		map_y;
 }	t_info;
 
 typedef struct s_img
@@ -73,6 +81,8 @@ typedef struct s_img
 	int		size_l;
 	int		endian;
 	int		*addr;
+	int		tex_x;
+	int		tex_y;
 }	t_img;
 
 typedef struct s_data {
@@ -81,6 +91,7 @@ typedef struct s_data {
 	t_img		imgs[4];
 	t_textures	textures;
 	t_info		*info;
+	t_img		*img_buff;
 }	t_data;
 
 void	cut_map(char	**file, t_info	*info);

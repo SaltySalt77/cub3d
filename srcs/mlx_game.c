@@ -12,6 +12,9 @@ void	init_game(t_data *m_data, t_textures *textures)
 	{
 		m_data->imgs[i].image = mlx_xpm_file_to_image(m_data->mlx,
 				textures->filename[i], &wid, &hei);
+		m_data->imgs[i].addr = (int *) mlx_get_data_addr(m_data->imgs[i].image,
+				&m_data->imgs[i].bpp, &m_data->imgs[i].size_l,
+				&m_data->imgs[i].endian);
 		if (!m_data->imgs[i].image)
 			perror_exit("No search file or diretory");
 		i++;

@@ -40,6 +40,94 @@ void	paint_back(t_data *m_data, t_img *buffer)
 	painter(buffer, _ceil, _floor);
 }
 
+int	init_side_dist(double rayDir, double pos, double *sideDist, double deltaDist)
+{
+	int	step;
+
+	if (rayDir < 0)
+	{
+		step = -1;
+		*sideDist = pos * deltaDist;
+	}
+	else
+	{
+		step = 1;
+		*sideDist = (-pos + 1.0) * deltaDist;
+	}
+	return (step);
+}
+
+int	check_hit(t_info *info, double rayDirX, double rayDirY)
+{
+	int	side;
+
+	info->step_x = init_side_dist(rayDirX, info->pos_x - (int)info->pos_x,
+			&(info->side_dist_x), info->delta_dist_x);
+	info->step_y = init_side_dist(rayDirY, info->pos_y - (int)info->pos_y,
+			&(info->side_dist_y), info->delta_dist_y);
+	while (1)
+	{
+		if (info->side_dist_x < info->side_dist_y)
+		{
+			info->side_dist_x += info->delta_dist_x;
+			info->map_x += info->step_x;
+			side = 0;
+		}
+		else
+		{
+			info->side_dist_y += info->delta_dist_y;
+			info->map_y += info->step_y;
+			side = 1;
+		}
+		if (info->map[info->map_y][info->map_x] == '1')
+			break ;
+	}
+	return (side);
+}
+
+int	check_texture(double rayDirX, double rayDirY, int side)
+{
+	int	text_num;
+
+	if (rayDirX < 0 && side == 0)
+		text_num = WEST;
+	else if (rayDirX > 0 && side == 0)
+		text_num = EAST;
+	else if (rayDirY < 0 && side == 1)
+		text_num = NORTH;
+	else
+		text_num = SOUTH;
+	return (text_num);
+}
+
+void	draw_line(t_data *m_data, int text_num, int lineHeight, int x)
+{
+	int		draw_start;
+	int		draw_end;
+	double	step;
+	double	tex_pos;
+	int		y;
+
+	draw_start = -lineHeight / 2 + SCREEN_HEIGHT / 2;
+	if (draw_start < 0)
+		draw_start = 0;
+	draw_end = lineHeight / 2 + SCREEN_HEIGHT / 2;
+	if (draw_end >= SCREEN_HEIGHT)
+		draw_end = SCREEN_HEIGHT - 1;
+	step = 1.0 * TEX_WIDTH / lineHeight;
+	tex_pos = (draw_start - SCREEN_HEIGHT / 2 + lineHeight / 2) * step;
+	y = draw_start;
+	while (y < draw_end)
+	{
+		m_data->imgs[text_num].tex_y = (int)tex_pos & (TEX_WIDTH - 1);
+		tex_pos += step;
+		m_data->img_buff->addr[(m_data->img_buff->size_l) / 4 * y + x]
+			= m_data->imgs[text_num].addr[(m_data->imgs[text_num].size_l) / 4
+			* m_data->imgs[text_num].tex_y + m_data->imgs[text_num].tex_x];
+		y++;
+	}
+}
+
 int	ray_casting(void	*value)
 {
 	t_data	*m_data;
@@ -47,110 +135,39 @@ int	ray_casting(void	*value)
 
 	m_data = value;
 	info = m_data->info;
-
 	t_img buffer;
 	paint_back(m_data, &buffer);
-
-	int w = SCREEN_WIDTH;
-	for(int x = 0; x < w; x++)
+	m_data->img_buff = &buffer;
+	// int w = SCREEN_WIDTH;
+	int x;
+	x = 0;
+	while(x < SCREEN_WIDTH)
 	{
-		double cameraX = (2*x/(double)w)-1; //x-coordinate in camera space
+		double cameraX = (2*x/(double)SCREEN_WIDTH)-1; //x-coordinate in camera space
 		double rayDirX = info->dir_x + info->plane_x*cameraX; //planeX
 		double rayDirY = info->dir_y + info->plane_y*cameraX; //planeY
 
-		int mapX = (int)info->pos_x;
-		int mapY = (int)info->pos_y;
-
-		double sideDistX;
-		double sideDistY;
-
-		double deltaDistX = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
-		double deltaDistY = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
+		info->map_x = (int)info->pos_x;
+		info->map_y = (int)info->pos_y;
 		double perpWallDist;
-
-		int stepX;
-		int stepY;
-
-		int hit = 0; //was there a wall hit?
 		int side; //was a NS or a EW wall hit?
+		info->delta_dist_x = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
+		info->delta_dist_y = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
 
-		if (rayDirX < 0)
-		{
-			stepX = -1;
-			sideDistX = (info->pos_x - mapX) * deltaDistX;
-		}
-		else
-		{
-			stepX = 1;
-			sideDistX = (mapX + 1.0 - info->pos_x) * deltaDistX;
-		}
-		if (rayDirY < 0)
-		{
-			stepY = -1;
-			sideDistY = (info->pos_y - mapY) * deltaDistY;
-		}
-		else
-		{
-			stepY = 1;
-			sideDistY = (mapY + 1.0 - info->pos_y) * deltaDistY;
-		}
-		while (hit == 0)
-		{
-			if (sideDistX < sideDistY)
-			{
-				sideDistX += deltaDistX;
-				mapX += stepX;
-				side = 0;
-			}
-			else
-			{
-				sideDistY += deltaDistY;
-				mapY += stepY;
-				side = 1;
-			}
-			if (info->map[mapY][mapX] == '1')
-			{
-				hit = 1;
-			}
-		}
-		if (side == 0) perpWallDist = (mapX - info->pos_x + (1 - stepX) / 2) / rayDirX;
-		else           perpWallDist = (mapY - info->pos_y + (1 - stepY) / 2) / rayDirY;
-
-		int lineHeight = (int)(SCREEN_HEIGHT / perpWallDist);
-
-		int drawStart = -lineHeight / 2 + SCREEN_HEIGHT / 2;
-		if(drawStart < 0) drawStart = 0;
-		int drawEnd = lineHeight / 2 + SCREEN_HEIGHT / 2;
-		if(drawEnd >= SCREEN_HEIGHT) drawEnd = SCREEN_HEIGHT - 1;
+		side = check_hit(info, rayDirX, rayDirY);
+		if (side == 0) perpWallDist = (info->map_x - info->pos_x + (1 - info->step_x) / 2) / rayDirX;
+		else           perpWallDist = (info->map_y - info->pos_y + (1 - info->step_y) / 2) / rayDirY;
 		double wallX;
 		if (side == 0) wallX = info->pos_y + perpWallDist * rayDirY;
 		else           wallX = info->pos_x + perpWallDist * rayDirX;
 		wallX -= floor((wallX));
-		int texX = (int)(wallX * (double)TEX_WIDTH);
-		int	text_num;
-
-		if (rayDirX < 0 && side == 0)
-			text_num = WEST;
-		else if (rayDirX > 0 && side == 0)
-			text_num = EAST;
-		else if (rayDirY < 0 && side == 1)
-			text_num = NORTH;
-		else
-			text_num = SOUTH;
-		if(rayDirX < 0 && side == 0) texX = TEX_WIDTH - texX - 1;//0 // west texture
-		if(rayDirY > 0 && side == 1) texX = TEX_WIDTH - texX - 1;//1 // south texture
-		double step = 1.0 * TEX_WIDTH / lineHeight;
-		double texPos = (drawStart - SCREEN_HEIGHT / 2 + lineHeight / 2) * step;
-		unsigned int *data;
-		int color;
-		for(int y = drawStart; y<drawEnd; y++)
-		{
-			int texY = (int)texPos & (TEX_WIDTH - 1);
-			texPos += step;
-			data = (unsigned int *)mlx_get_data_addr(m_data->imgs[text_num].image ,&(m_data->imgs[text_num].bpp),&(m_data->imgs[text_num].size_l),&(m_data->imgs[text_num].endian));
-			color = data[(m_data->imgs[text_num].size_l)/4 * texY + texX];
-			buffer.addr[(buffer.size_l)/4 * y + x] = color;
-		}
+		int tex_x = (int)(wallX * (double)TEX_WIDTH);
+		int	text_num = check_texture(rayDirX, rayDirY, side);
+		if(text_num == SOUTH || text_num == WEST)
+			tex_x = TEX_WIDTH - tex_x - 1;
+		m_data->imgs[text_num].tex_x = tex_x;
+		draw_line(m_data, text_num, (int)(SCREEN_HEIGHT / perpWallDist), x);
+		x++;
 	}
 	mlx_put_image_to_window(m_data->mlx, m_data->win, buffer.image, 0, 0);
 	mlx_destroy_image(m_data->mlx, buffer.image);
