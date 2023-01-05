@@ -128,45 +128,57 @@ void	draw_line(t_data *m_data, int text_num, int lineHeight, int x)
 	}
 }
 
+void	ray_cast(t_data	*m_data, t_info *info, int x)
+{
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	perpwall_dist;
+	int		side;
+	double	wall_x;
+	int		tex_x;
+	int		text_num;
+
+	camera_x = (2 * x / (double)SCREEN_WIDTH) - 1;
+	ray_dir_x = info->dir_x + info->plane_x * camera_x;
+	ray_dir_y = info->dir_y + info->plane_y * camera_x;
+	info->map_x = (int)info->pos_x;
+	info->map_y = (int)info->pos_y;
+	info->delta_dist_x = sqrt(1 + (ray_dir_y * ray_dir_y) / (ray_dir_x * ray_dir_x));
+	info->delta_dist_y = sqrt(1 + (ray_dir_x * ray_dir_x) / (ray_dir_y * ray_dir_y));
+	side = check_hit(info, ray_dir_x, ray_dir_y);
+	if (side == 0)
+		perpwall_dist = (info->map_x - info->pos_x + (1 - info->step_x) / 2) / ray_dir_x;
+	else
+		perpwall_dist = (info->map_y - info->pos_y + (1 - info->step_y) / 2) / ray_dir_y;
+	if (side == 0)
+		wall_x = info->pos_y + perpwall_dist * ray_dir_y;
+	else
+		wall_x = info->pos_x + perpwall_dist * ray_dir_x;
+	wall_x -= floor((wall_x));
+	tex_x = (int)(wall_x * (double)TEX_WIDTH);
+	text_num = check_texture(ray_dir_x, ray_dir_y, side);
+	if (text_num == SOUTH || text_num == WEST)
+		tex_x = TEX_WIDTH - tex_x - 1;
+	m_data->imgs[text_num].tex_x = tex_x;
+	draw_line(m_data, text_num, (int)(SCREEN_HEIGHT / perpwall_dist), x);
+}
+
 int	ray_casting(void	*value)
 {
 	t_data	*m_data;
 	t_info	*info;
+	int		x;
+	t_img	buffer;
 
 	m_data = value;
 	info = m_data->info;
-	t_img buffer;
 	paint_back(m_data, &buffer);
 	m_data->img_buff = &buffer;
-	// int w = SCREEN_WIDTH;
-	int x;
 	x = 0;
-	while(x < SCREEN_WIDTH)
+	while (x < SCREEN_WIDTH)
 	{
-		double cameraX = (2*x/(double)SCREEN_WIDTH)-1; //x-coordinate in camera space
-		double rayDirX = info->dir_x + info->plane_x*cameraX; //planeX
-		double rayDirY = info->dir_y + info->plane_y*cameraX; //planeY
-
-		info->map_x = (int)info->pos_x;
-		info->map_y = (int)info->pos_y;
-		double perpWallDist;
-		int side; //was a NS or a EW wall hit?
-		info->delta_dist_x = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
-		info->delta_dist_y = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
-
-		side = check_hit(info, rayDirX, rayDirY);
-		if (side == 0) perpWallDist = (info->map_x - info->pos_x + (1 - info->step_x) / 2) / rayDirX;
-		else           perpWallDist = (info->map_y - info->pos_y + (1 - info->step_y) / 2) / rayDirY;
-		double wallX;
-		if (side == 0) wallX = info->pos_y + perpWallDist * rayDirY;
-		else           wallX = info->pos_x + perpWallDist * rayDirX;
-		wallX -= floor((wallX));
-		int tex_x = (int)(wallX * (double)TEX_WIDTH);
-		int	text_num = check_texture(rayDirX, rayDirY, side);
-		if(text_num == SOUTH || text_num == WEST)
-			tex_x = TEX_WIDTH - tex_x - 1;
-		m_data->imgs[text_num].tex_x = tex_x;
-		draw_line(m_data, text_num, (int)(SCREEN_HEIGHT / perpWallDist), x);
+		ray_cast(m_data, info, x);
 		x++;
 	}
 	mlx_put_image_to_window(m_data->mlx, m_data->win, buffer.image, 0, 0);
