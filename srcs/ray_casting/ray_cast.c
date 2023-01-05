@@ -1,5 +1,45 @@
 #include "cub3d.h"
 
+void	painter(t_img *buffer, int _ceil, int _floor)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < SCREEN_HEIGHT / 2)
+	{
+		x = 0;
+		while (x < SCREEN_WIDTH)
+		{
+			buffer->addr[(buffer->size_l) / 4 * y + x] = _ceil;
+			buffer->addr[(buffer->size_l) / 4 * (SCREEN_HEIGHT - y - 1) + x]
+				= _floor;
+			x++;
+		}
+		y++;
+	}
+}
+
+void	paint_back(t_data *m_data, t_img *buffer)
+{
+	int	_ceil;
+	int	_floor;
+	int	temp;
+
+	buffer->image = mlx_new_image(m_data->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+	_ceil = 0;
+	_floor = 0;
+	buffer->addr = (int *)mlx_get_data_addr(buffer->image,
+			&(buffer->bpp), &(buffer->size_l), &(buffer->endian));
+	temp = -1;
+	while (++temp < 3)
+	{
+		_ceil = _ceil * 256 + m_data->textures.ceiling[temp];
+		_floor = _floor * 256 + m_data->textures.floor[temp];
+	}
+	painter(buffer, _ceil, _floor);
+}
+
 int	ray_casting(void	*value)
 {
 	t_data	*m_data;
@@ -7,44 +47,10 @@ int	ray_casting(void	*value)
 
 	m_data = value;
 	info = m_data->info;
-	t_img buffer; // y-coordinate first because it works per scanline//<<<int*
-	buffer.image = mlx_new_image(m_data->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-	int pp;
-	int xx;
-	pp = 0;
-	int _ceil = 0;
-	int _floor = 0;
+	t_img buffer;
+	paint_back(m_data, &buffer);
 
-	int *buf_address = (int *)mlx_get_data_addr(buffer.image ,&(buffer.bpp),&(buffer.size_l),&(buffer.endian));
-	for (int yy = 0; yy < 3; yy++)
-	{
-		_ceil = _ceil * 256 + m_data->textures.ceiling[yy];
-	}
-	while(pp < SCREEN_HEIGHT/2)
-	{
-		xx = 0;
-		while(xx < SCREEN_WIDTH)
-		{
-			buf_address[(buffer.size_l)/4 * pp + xx] = _ceil;
-			xx++;
-		}
-		pp++;
-	}
-	for (int yy = 0; yy < 3; yy++)//
-	{
-		_floor = _floor * 256 + m_data->textures.floor[yy];
-	}
-	while(pp < SCREEN_HEIGHT)
-	{
-		xx = 0;
-		while(xx < SCREEN_WIDTH)
-		{
-			buf_address[(buffer.size_l)/4 * pp + xx] = _floor;
-			xx++;
-		}
-		pp++;
-	}
 	int w = SCREEN_WIDTH;
 	for(int x = 0; x < w; x++)
 	{
@@ -143,7 +149,7 @@ int	ray_casting(void	*value)
 			texPos += step;
 			data = (unsigned int *)mlx_get_data_addr(m_data->imgs[text_num].image ,&(m_data->imgs[text_num].bpp),&(m_data->imgs[text_num].size_l),&(m_data->imgs[text_num].endian));
 			color = data[(m_data->imgs[text_num].size_l)/4 * texY + texX];
-			buf_address[(buffer.size_l)/4 * y + x] = color;
+			buffer.addr[(buffer.size_l)/4 * y + x] = color;
 		}
 	}
 	mlx_put_image_to_window(m_data->mlx, m_data->win, buffer.image, 0, 0);

@@ -1,20 +1,5 @@
 #include "cub3d.h"
 
-void	key_hook_a(t_info	*info)
-{
-    if(info->map[(int)(info->pos_y - info->plane_y * MOVE_SPEED * 2)][(int)info->pos_x] == '0')
-		info->pos_y -= info->plane_y * MOVE_SPEED;
-	if(info->map[(int)info->pos_y][(int)(info->pos_x - info->plane_x * MOVE_SPEED * 2)] == '0')
-		info->pos_x -= info->plane_x * MOVE_SPEED;
-}
-void	key_hook_d(t_info	*info)
-{
-	if (info->map[(int)(info->pos_y + info->plane_y * MOVE_SPEED * 2)][(int)(info->pos_x)] == '0')
-		info->pos_y += info->plane_y * MOVE_SPEED;
-	if (info->map[(int)(info->pos_y)][(int)(info->pos_x + info->plane_x * MOVE_SPEED * 2)] == '0')
-		info->pos_x += info->plane_x * MOVE_SPEED;
-}
-
 int	key_hook(t_info *info)
 {
 	if (info->move.w && !info->move.s)
@@ -32,18 +17,50 @@ int	key_hook(t_info *info)
 	return (1);
 }
 
+void	key_hook_a(t_info	*info)
+{
+	double	dist;
+
+	dist = info->plane_y * MOVE_SPEED * 2;
+	if (info->map[(int)(info->pos_y - dist)][(int)info->pos_x] == '0')
+		info->pos_y -= info->plane_y * MOVE_SPEED;
+	dist = info->plane_x * MOVE_SPEED * 2;
+	if (info->map[(int)info->pos_y][(int)(info->pos_x - dist)] == '0')
+		info->pos_x -= info->plane_x * MOVE_SPEED;
+}
+
+void	key_hook_d(t_info	*info)
+{
+	double	dist;
+
+	dist = info->plane_y * MOVE_SPEED * 2;
+	if (info->map[(int)(info->pos_y + dist)][(int)(info->pos_x)] == '0')
+		info->pos_y += info->plane_y * MOVE_SPEED;
+	dist = info->plane_x * MOVE_SPEED * 2;
+	if (info->map[(int)(info->pos_y)][(int)(info->pos_x + dist)] == '0')
+		info->pos_x += info->plane_x * MOVE_SPEED;
+}
+
 void	key_hook_w(t_info *info)
 {
-	if (info->map[(int)(info->pos_y + info->dir_y * MOVE_SPEED * 2)][(int)(info->pos_x)] == '0')
+	double	dist;
+
+	dist = info->dir_y * MOVE_SPEED * 2;
+	if (info->map[(int)(info->pos_y + dist)][(int)(info->pos_x)] == '0')
 		info->pos_y += info->dir_y * MOVE_SPEED;
-	if (info->map[(int)(info->pos_y)][(int)(info->pos_x + info->dir_x * MOVE_SPEED * 2)] == '0')
+	dist = info->dir_x * MOVE_SPEED * 2;
+	if (info->map[(int)(info->pos_y)][(int)(info->pos_x + dist)] == '0')
 		info->pos_x += info->dir_x * MOVE_SPEED;
 }
 
 void	key_hook_s(t_info	*info)
 {
-    if (info->map[(int)(info->pos_y - info->dir_y * MOVE_SPEED * 2)][(int)info->pos_x] == '0')
+	double	dist;
+
+	dist = info->dir_y * MOVE_SPEED * 2;
+	if (info->map[(int)(info->pos_y - dist)][(int)info->pos_x] == '0')
 		info->pos_y -= info->dir_y * MOVE_SPEED;
-	if (info->map[(int)info->pos_y][(int)(info->pos_x - info->dir_x * MOVE_SPEED * 2)] == '0')
+	dist = info->dir_x * MOVE_SPEED * 2;
+	if (info->map[(int)info->pos_y][(int)(info->pos_x - dist)] == '0')
 		info->pos_x -= info->dir_x * MOVE_SPEED;
 }

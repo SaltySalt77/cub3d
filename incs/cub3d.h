@@ -72,6 +72,7 @@ typedef struct s_img
 	int		bpp;
 	int		size_l;
 	int		endian;
+	int		*addr;
 }	t_img;
 
 typedef struct s_data {
