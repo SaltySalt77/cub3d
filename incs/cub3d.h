@@ -70,6 +70,8 @@ typedef struct s_info {
 	int		step_y;
 	int		map_x;
 	int		map_y;
+	double	ray_dir_x;
+	double	ray_dir_y;
 }	t_info;
 
 typedef struct s_img
@@ -104,6 +106,7 @@ int		check_vec(t_info *info);
 void	assort_textures(char **file, t_textures	*textures, char	*std[6]);
 int		save_rgb(int	*rgb, char	**line);
 int		validate_newline(char	*filename, t_info	*info);
+void	init_info(t_info *info);
 
 int		key_hook(t_info *info);
 void	key_hook_a(t_info	*info);
@@ -122,4 +125,9 @@ void	init_game(t_data *m_data, t_textures *textures);
 
 int		ray_casting(void	*value);
 
+void	paint_back(t_data *m_data, t_img *buffer);
+void	draw_line(t_data *m_data, int text_num, int lineHeight, int x);
+int		init_side_dist(double rayDir, double pos, double *sideDist,
+			double deltaDist);
+int		check_texture(double rayDirX, double rayDirY, int side);
 #endif

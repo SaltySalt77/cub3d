@@ -6,7 +6,7 @@
 #    By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/18 15:40:24 by hyna              #+#    #+#              #
-#    Updated: 2023/01/05 14:59:22 by nhwang           ###   ########.fr        #
+#    Updated: 2023/01/05 16:28:35 by nhwang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,10 +32,12 @@ SRCS_NAME = main.c \
 			map_parsing/check_vec.c	\
 			map_parsing/save_texture.c	\
 			map_parsing/validate_map2.c	\
+			map_parsing/set_dir_plane.c	\
 			key_hook/key_dir.c	\
 			key_hook/key_rotate.c	\
 			key_hook/key_p_r.c	\
 			ray_casting/ray_cast.c	\
+			ray_casting/paint.c	\
 
 SRCS_PATH = ./srcs
 SRCS = $(addprefix $(SRCS_PATH)/, $(SRCS_NAME))
