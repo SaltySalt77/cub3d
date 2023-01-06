@@ -65,8 +65,10 @@
 
 - [x] norminette
 - [x] 함수 자르기 및 이름 수정
-- [ ] validate tester기 다시 돌리기
-- [ ] flag 추가해서 다시 돌려보기
+- [x] validate tester기 다시 돌리기
+- [x] flag 추가해서 다시 돌려보기
+
+- [ ] 평가 받기
 
 ### 1229 목표
 
