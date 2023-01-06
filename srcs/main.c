@@ -28,7 +28,6 @@ int	main(int argc, char	**argv)
 	if (argc != 2)
 	{
 		perror("Error\n");
-		system("leaks cub3D");
 		return (1);
 	}
 	parser(&(m_data.textures), &info, argv[1]);

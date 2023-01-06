@@ -37,6 +37,7 @@ int	validate_newline(char	*filename, t_info	*info)
 		compare = get_next_line(fd);
 		i++;
 	}
+	free(compare);
 	close(fd);
 	return (1);
 }
