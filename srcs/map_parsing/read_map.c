@@ -6,7 +6,7 @@
 /*   By: nhwang <nhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:18:01 by hyna              #+#    #+#             */
-/*   Updated: 2022/12/28 16:21:05 by nhwang           ###   ########.fr       */
+/*   Updated: 2023/01/06 11:47:50 by nhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void	parser(t_textures	*textures, t_info	*info, char	*arg)
 	validate_filename(arg);
 	file = read_file(arg);
 	assort_textures(file, textures, std);
+	check_fc(file);
 	cut_map(file, info);
 	if (!info->map)
 	{

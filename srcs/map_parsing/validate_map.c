@@ -67,3 +67,29 @@ int	validate_map(t_info *info, char	*filename)
 		perror_exit("Invalid map");
 	return (1);
 }
+
+void	check_fc(char **file)
+{
+	int	i;
+	int	j;
+	int	cnt;
+
+	i = 0;
+	while (file[i])
+	{
+		if (file[i][0] == 'C' || file[i][0] == 'F')
+		{
+			cnt = 0;
+			j = 0;
+			while (file[i][j])
+			{
+				if (file[i][j] == ',')
+					cnt++;
+				j++;
+			}
+			if (cnt > 2)
+				perror_exit("Invaild identifier");
+		}
+		i++;
+	}
+}

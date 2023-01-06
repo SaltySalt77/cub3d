@@ -130,4 +130,6 @@ void	draw_line(t_data *m_data, int text_num, int lineHeight, int x);
 int		init_side_dist(double rayDir, double pos, double *sideDist,
 			double deltaDist);
 int		check_texture(double rayDirX, double rayDirY, int side);
+void	check_fc(char **file);
+
 #endif
