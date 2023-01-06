@@ -6,7 +6,7 @@
 /*   By: hyna <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:10:20 by hyna              #+#    #+#             */
-/*   Updated: 2023/01/06 12:10:22 by hyna             ###   ########.fr       */
+/*   Updated: 2023/01/06 12:16:06 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	perror_exit(char *err_msg)
 	}
 	ft_putendl_fd("Error", 2);
 	ft_putendl_fd(err_msg, 2);
-	system("leaks cub3D | grep leaks");
 	exit(1);
 }
 
@@ -39,7 +38,7 @@ int	main(int argc, char	**argv)
 
 	if (argc != 2)
 	{
-		perror("Error\n");
+		perror_exit("Need map");
 		return (1);
 	}
 	parser(&(m_data.textures), &info, argv[1]);

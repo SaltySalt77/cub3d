@@ -6,7 +6,7 @@
 /*   By: hyna <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:10:23 by hyna              #+#    #+#             */
-/*   Updated: 2023/01/06 12:10:24 by hyna             ###   ########.fr       */
+/*   Updated: 2023/01/06 12:18:38 by hyna             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,5 @@ void	init_game(t_data *m_data, t_textures *textures)
 int	exit_game(t_data *m_data)
 {
 	mlx_destroy_window(m_data->mlx, m_data->win);
-	system("leaks cub3D | grep leak");
 	exit(0);
 }
